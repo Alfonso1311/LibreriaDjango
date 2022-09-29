@@ -1,0 +1,49 @@
+**Comprobar version de python
+python --version
+
+**Instalar visual studio 2022 "comunidad"
+https://visualstudio.microsoft.com/es/downloads/
+
+**Crear entorno virtual
+1-. Ir a la ruta para crearlo en CMD
+2-. virtualenv + nombreEntorno
+
+**Activar entorno virtual
+.\nombreEntorno\Scripts\activate
+
+**Instalar los paquetes necesarios para el proyecto
+pip install Django==3.2.8
+pip freeze
+
+**Crear la estructura necesaria de Django para trabajar
+django-admin startproject nombreCarpeta
+
+**Correr un servisor para saber que ya se instaló Django y probar las aplicaciones
+python manage.py runserver
+
+**Crear aplicación con el nombre libreria y tiene archivos para configurar vistas o partes de la app
+python manage.py startapp libreria
+
+**Listar paquetes Instalados
+pip list
+
+**Instalar paquetes para conectarse a la BD
+pip install pyMySQL
+pip install pillow
+
+**Crear una migración
+python manage.py makemigrations
+
+**Hacer una migración para subirla a la BD 
+python manage.py migrate
+
+**Volver a hacer un cambio en la base de datos (Reestructurar la tabla)
+python manage.py makemigrations
+ingresar 'y'
+python manage.py migrate (Actualliza la modificación en la BD)
+
+**Crear un ususario para poder entrar al administrativo
+python manage.py createsuperuser
+usuario: alfon
+email: dcao201793@upemor.edu.mx
+password: Sk@13.11

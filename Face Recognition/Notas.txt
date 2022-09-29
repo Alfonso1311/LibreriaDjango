@@ -1,0 +1,34 @@
+**Comprobar version de python
+python --version
+
+**Instalar visual studio 2022 "comunidad"
+https://visualstudio.microsoft.com/es/downloads/
+
+**Instalar cmake y despues dlib
+pip install cmake
+pip install dlib
+
+**Instalar modular entorno virtual
+pip install virtualenv
+
+**Lista de modulos instalados en el sistema
+pip freeze
+
+**Crear entorno virtual
+1-. Ir a la ruta para crearlo en CMD
+2-. virtualenv + nombreEntorno
+
+**Activar entorno virtual
+.\nombreEntorno\Scripts\activate
+
+**Instalar los paquetes necesarios para el proyecto
+pip install face-recognition
+pip install opencv-contrib-python
+pip freeze
+
+**Si arroja error de que la ejecucion de Scripts está desabilitada
+1.- Abrir powershell como administrador
+2.- set-executionpolicy unrestricted -force
+
+
+
