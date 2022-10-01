@@ -31,6 +31,8 @@ pip list
 pip install pyMySQL
 pip install pillow
 
+**Crear la BD en MySQL
+
 **Crear una migración
 python manage.py makemigrations
 
@@ -47,3 +49,31 @@ python manage.py createsuperuser
 usuario: alfon
 email: dcao201793@upemor.edu.mx
 password: Sk@13.11
+
+
+
+************************************************************************************************
+************************************************************************************************
+************************************************************************************************
+************************************************************************************************
+
+
+1- Instalar extensiones: 
+    Bootstrap 5 por Anbuselvan Rocky
+    GitHub Copilot por GitHub
+
+2- Crear projecto con Django
+
+3- Comprobar que está corriendo Django en el navegador
+
+4- Crear aplicación con Django
+
+5- Agregar la aplicación a settings.py en INSTALLED_APPS
+
+6- Crear una instrucción en views.py de la aplicación para que le muestre en el navegador
+
+7- Crear archivo urls.py para que se pueda mostrar el contenido en el navegador
+
+8- Modificar las urls de lsistema para acceder a las urls de la aplicación
+
+9-

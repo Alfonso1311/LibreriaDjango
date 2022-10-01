@@ -1,0 +1,16 @@
+{% extends "baseD.html" %}
+
+{% block titulo %} Agregar nuevo directivo {% endblock %}
+
+{% block contenido %} 
+    <div class="card">
+        <div class="card-header">
+            Agregar un directivo
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Datos del directivo</h4>
+
+            {% include 'usuarios/directivo/form.html' %}
+        </div>
+    </div>
+{% endblock %}

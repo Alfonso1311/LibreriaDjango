@@ -1,0 +1,51 @@
+{% extends "baseD.html" %}
+
+{% block titulo %} Lista de Directivos {% endblock %}
+
+{% block contenido %} 
+    <div class="card">
+        <div class="card-header">
+            <a name="" id="" class="btn btn-success" href="{% url 'crear' %}" role="button"><i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Directivos</h4>
+            <div class="table-responsive">
+                <table class="table table-primary">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido P</th>
+                            <th scope="col">Apellido M</th>
+                            <th scope="col">Fecha Nac</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Area</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for directivo in directivos %}
+                            <tr class="">
+                                <td>{{ directivo.id }}</td>
+                                <td>{{ directivo.nombre }}</td>
+                                <td>{{ directivo.apellidoP }}</td>
+                                <td>{{ directivo.apellidoM }}</td>
+                                <td>{{ directivo.fechaNac }}</td>
+                                <td>{{ directivo.correo }}</td>
+                                <td>{{ directivo.area }}</td>
+                                <td>
+                                    <a name="" id="" class="btn btn-info" href="{% url 'editar' directivo.id%}" role="button">Editar</a>
+                                    <a name="" id="" class="btn btn-danger" href="{% url 'eliminar' directivo.id%}" role="button">Borrar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        <div class="card-footer text-muted">
+            
+        </div>
+    </div>
+{% endblock %}
