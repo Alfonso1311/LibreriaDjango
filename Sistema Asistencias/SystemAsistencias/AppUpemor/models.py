@@ -21,3 +21,19 @@ class Directivo(models.Model):
 
     def delete(self, using=None, keep_parents=False):
         super().delete()
+
+class Profesor(models.Model):
+    id = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=100, verbose_name='Nombre')
+    apellidoP = models.CharField(max_length=100, verbose_name='Apellido P')
+    apellidoM = models.CharField(max_length=100, verbose_name='Apellido M')
+    fechaNac = models.DateField(auto_now_add=False, auto_now=False, blank=True ,verbose_name='Fecha Nac (yyyy-mm-dd)', null=True)
+    correo = models.EmailField(verbose_name='Correo', null=True)
+    da = models.CharField(max_length=100, verbose_name='DA', null=True)
+
+    def __str__(self):
+        fila = "Nombre: " + self.nombre + " - " + " Apellido P: " + self.apellidoP
+        return fila
+
+    def delete(self, using=None, keep_parents=False):
+        super().delete()

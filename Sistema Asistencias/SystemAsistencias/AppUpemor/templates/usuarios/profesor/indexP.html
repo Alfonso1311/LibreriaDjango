@@ -1,0 +1,54 @@
+{% extends "baseD.html" %}
+
+{% block titulo %} Lista de Profesores {% endblock %}
+
+{% block contenido %} 
+
+<link rel="stylesheet" href="../static/css/baseD.css">
+
+    <div class="card">
+        <div class="card-header">
+            <a name="" id="" class="btn btn-warning" href="{% url 'crearP' %}" role="button"><i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Profesores</h4>
+            <div class="table-responsive">
+                <table class="table table-primary">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido P</th>
+                            <th scope="col">Apellido M</th>
+                            <th scope="col">Fecha Nac</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">DA</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for profesor in profesores %}
+                            <tr class="">
+                                <td>{{ profesor.id }}</td>
+                                <td>{{ profesor.nombre }}</td>
+                                <td>{{ profesor.apellidoP }}</td>
+                                <td>{{ profesor.apellidoM }}</td>
+                                <td>{{ profesor.fechaNac|date:'Y-m-d' }}</td>
+                                <td>{{ profesor.correo }}</td>
+                                <td>{{ profesor.da }}</td>
+                                <td>
+                                    <a name="" id="" class="btn btn-info" href="{% url 'editarP' profesor.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a name="" id="" class="btn btn-danger" href="{% url 'eliminarP' profesor.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        <div class="card-footer text-muted">
+            
+        </div>
+    </div>
+{% endblock %}
