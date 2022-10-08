@@ -1,5 +1,9 @@
 from django import forms
+<<<<<<< Updated upstream
 from .models import Directivo, Profesor
+=======
+from .models import Directivo, Profesor, Alumno, Grupo
+>>>>>>> Stashed changes
 
 class DirectivoForm(forms.ModelForm):
     class Meta:
@@ -11,3 +15,17 @@ class ProfesorForm(forms.ModelForm):
     class Meta:
         model = Profesor
         fields = '__all__'
+<<<<<<< Updated upstream
+=======
+
+class AlumnoForm(forms.ModelForm):
+    class Meta:
+        model = Alumno
+        fields = '__all__'  #['Nombre','Apellido,'Foto'] si quiero especificar campos de la base de datos 
+        
+class GrupoForm(forms.ModelForm):
+    class Meta:
+        model = Grupo
+        fields = '__all__'  #['Nombre','Apellido,'Foto'] si quiero especificar campos de la base de datos 
+        
+>>>>>>> Stashed changes

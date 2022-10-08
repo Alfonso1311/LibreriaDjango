@@ -1,0 +1,52 @@
+{% extends "baseP.html" %}
+
+{% block titulo %} Lista de Profesores {% endblock %}
+
+{% block contenido %} 
+
+<link rel="stylesheet" href="../static/css/baseP.css">
+
+    <div class="card">
+        <div class="card-header">
+            <a name="" id="" class="btn btn-warning" href="{% url 'crearG' %}" role="button"><i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Grupos</h4>
+            <div class="table-responsive">
+                <table class="table table-primary">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Cuatrimestre</th>
+                            <th scope="col">Grupo</th>
+                            <th scope="col">Asignatura</th>
+                            <th scope="col">Profesor</th>
+                            <th scope="col">Carrera</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for grupo in grupos %}
+                            <tr class="">
+                                <td>{{ grupo.id }}</td>
+                                <td>{{ grupo.cuatri }}</td>
+                                <td>{{ grupo.grupo }}</td>
+                                <td>{{ grupo.asignatura }}</td>
+                                <td>{{ grupo.profesor }}</td>
+                                <td>{{ grupo.carrera}}</td>
+                                <td>
+                                    <a name="" id="" class="btn btn-info" href="{% url 'editarG' grupo.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a name="" id="" class="btn btn-danger" href="{% url 'eliminarG' grupo.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        <div class="card-footer text-muted">
+            
+        </div>
+    </div>
+{% endblock %}
