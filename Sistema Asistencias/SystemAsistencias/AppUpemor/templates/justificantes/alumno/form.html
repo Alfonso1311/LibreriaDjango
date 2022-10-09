@@ -1,16 +1,9 @@
-<link rel="stylesheet" href="../static/css/baseD.css">
+<link rel="stylesheet" href="../static/css/baseA.css">
 <form enctype="multipart/form-data" method="post">
   {% csrf_token %}
   {% for campo in formulario %}
     <div class="mb-3">
-
       <label for="" class="form-label">{{ campo.label }}</label>
-
-      {% if campo.field.widget.input_type == 'file' and campo.value %}
-        <br>
-        <img src="{{MEDIA_URL}}/imagenes/{{campo.value}}" width="100" height="100" alt="">
-      {% endif %}
-
       {% if campo.name == 'fechaNac' %}
         <input 
           type="{{ campo.field.widget.input_type }}"
@@ -32,10 +25,13 @@
             value="{{ campo.value }}"
           />
       {% endif %}
-
+      {% if campo.field.widget.input_type == 'file' and campo.value %}
+        <br>
+        <img src="{{MEDIA_URL}}/imagenes/{{campo.value}}" width="100" height="100" alt="">
+      {% endif %}
     </div>
     <div class="col-12 help-text">{{ campo.errors }}</div>
   {% endfor %}
   <input name="" id="" class="btn btn-success" type="submit" value="Enviar información">
-  <a name="" id="" class="btn btn-primary" href="{% url 'directivos' %}" role="button">Cancelar</a>
+  <a name="" id="" class="btn btn-primary" href="{% url 'profesores' %}" role="button">Cancelar</a>
 </form>

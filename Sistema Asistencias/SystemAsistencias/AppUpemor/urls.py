@@ -16,10 +16,8 @@ urlpatterns = [
     path('profesor/crear', views.crearProfesor, name='crearP'),
     path('profesor/editar/<int:id>', views.editarProfesor, name='editarP'),
     path('eliminarP/<int:id>', views.eliminarProfesor, name='eliminarP'),
-<<<<<<< Updated upstream
-=======
 
-    path('alumnos', views.alumnos, name='alumnos'),
+    path('alumnos', views.alumnos, name='alumnos'), 
     path('alumno/crear', views.crearAlumno, name='crearA'),
     path('alumno/editar/<str:matricula>', views.editarAlumno, name='editarA'),
     path('eliminarA/<str:matricula>', views.eliminarAlumno, name='eliminarA'),
@@ -28,5 +26,14 @@ urlpatterns = [
     path('grupo/crear', views.crearGrupo, name='crearG'),
     path('grupo/editar/<int:id>', views.editarGrupo, name='editarG'),
     path('eliminarG/<int:id>', views.eliminarGrupo, name='eliminarG'),
->>>>>>> Stashed changes
+
+    path('horarios', views.horarios, name='horarios'),
+    path('horario/crear', views.crearHorario, name='crearH'),
+    path('horario/editar/<int:id>', views.editarHorario, name='editarH'),
+    path('eliminarH/<int:id>', views.eliminarHorario, name='eliminarH'),
+
+    path('asistencias', views.asistencias, name='asistencias'),
+    path('asistencia/crear', views.crearAsistencia, name='crearAsis'),
+    path('asistencia/editar/<int:id>', views.editarAsistencia, name='editarAsis'),
+    path('eliminarAsis/<int:id>', views.eliminarAsistencia, name='eliminarAsis'),
 ]

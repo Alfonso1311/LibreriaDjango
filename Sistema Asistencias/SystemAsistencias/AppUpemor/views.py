@@ -1,12 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-<<<<<<< Updated upstream
-from .models import Directivo, Profesor
-from .forms import DirectivoForm, ProfesorForm
-=======
-from .models import Directivo, Profesor, Alumno, Grupo
-from .forms import DirectivoForm, ProfesorForm, AlumnoForm, GrupoForm
->>>>>>> Stashed changes
+from .models import Directivo, Profesor, Alumno, Grupo, Horario, Asistencia
+from .forms import DirectivoForm, ProfesorForm, AlumnoForm, GrupoForm, HorarioForm, AsistenciaForm
 # Create your views here.
 
 def inicio(request):
@@ -58,9 +53,6 @@ def editarProfesor(request, id):
 def eliminarProfesor(request, id):
     profesor = Profesor.objects.get(id=id)
     profesor.delete()
-<<<<<<< Updated upstream
-    return redirect('profesores')
-=======
     return redirect('profesores')
 
 def alumnos(request):
@@ -111,5 +103,51 @@ def eliminarGrupo(request, id):
     grupo.delete()
     return redirect('grupos')
 
+def horarios(request):
+    horarios = Horario.objects.all()
+    return render(request, 'horarios/indexH.html', {'horarios': horarios})
+
+def crearHorario(request): 
+    formulario = HorarioForm(request.POST or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('horarios')
+    return render(request, 'horarios/crear.html', {'formulario': formulario})
+
+def editarHorario(request, id):
+    horario = Horario.objects.get(id=id)
+    formulario = HorarioForm(request.POST or None, instance=horario)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('horarios')
+    return render(request, 'horarios/editar.html', {'formulario': formulario, 'horario': horario})
+
+def eliminarHorario(request, id):
+    horario = Horario.objects.get(id=id)
+    horario.delete()
+    return redirect('horarios')
+
+def asistencias(request):
+    asistencias = Asistencia.objects.all()
+    return render(request, 'asistencias/indexAsis.html', {'asistencias': asistencias})
+
+def crearAsistencia(request): 
+    formulario = AsistenciaForm(request.POST or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('asistencias')
+    return render(request, 'asistencias/crear.html', {'formulario': formulario})
+
+def editarAsistencia(request, id):
+    asistencia = Asistencia.objects.get(id=id)
+    formulario = AsistenciaForm(request.POST or None, instance=asistencia)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('asistencias')
+    return render(request, 'asistencias/editar.html', {'formulario': formulario, 'asistencia': asistencia})
+
+def eliminarAsistencia(request, id):
+    asistencia = Asistencia.objects.get(id=id)
+    asistencia.delete()
+    return redirect('asistencias')
     
->>>>>>> Stashed changes

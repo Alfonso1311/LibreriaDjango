@@ -1,0 +1,49 @@
+{% extends "baseP.html" %}
+
+{% block titulo %} Lista de asistencias {% endblock %}
+
+{% block contenido %} 
+
+<link rel="stylesheet" href="../static/css/baseP.css">
+
+    <div class="card">
+        <div class="card-header">
+            <a name="" id="" class="btn btn-warning" href="{% url 'crearAsis' %}" role="button"><i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Asistencias </h4>
+            <div class="table-responsive">
+                <table class="table table-primary">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">ApellidoP</th>
+                            <th scope="col">ApellidoM</th>
+                            <th scope="col">Grupo</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for asistencia in asistencias %}
+                            <tr class="">
+                                <td>{{ asistencia.id }}</td>
+                                <td>{{ asistencia.nombre }}</td>
+                                <td>{{ asistencia.apellidoP }}</td>
+                                <td>{{ asistencia.apellidoM }}</td>
+                                <td>{{ asistencia.grupo}}</td>
+                                <td>
+                                    <a name="" id="" class="btn btn-info" href="{% url 'editarAsis' asistencia.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a name="" id="" class="btn btn-danger" href="{% url 'eliminarAsis' asistencia.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            
+        </div>
+    </div>
+{% endblock %}

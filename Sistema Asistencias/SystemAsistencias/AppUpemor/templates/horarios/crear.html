@@ -1,0 +1,15 @@
+{% extends "baseP.html" %}
+
+{% block titulo %} Agregar nuevo horario {% endblock %}
+
+{% block contenido %} 
+    <div class="card">
+        <div class="card-header">
+            Agregar un horario
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Datos del horario</h4>
+            {% include 'horarios/form.html' %}  
+        </div>
+    </div>
+{% endblock %}

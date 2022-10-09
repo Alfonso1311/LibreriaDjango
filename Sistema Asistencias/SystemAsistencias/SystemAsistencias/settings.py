@@ -129,4 +129,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static") #archivo estatico CSS
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
+MEDIA_ROOT = os.path.join(BASE_DIR, '')
+MEDIA_URL = '/imagenes/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

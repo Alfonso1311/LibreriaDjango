@@ -1,9 +1,7 @@
+from dataclasses import fields
+from pyexpat import model
 from django import forms
-<<<<<<< Updated upstream
-from .models import Directivo, Profesor
-=======
-from .models import Directivo, Profesor, Alumno, Grupo
->>>>>>> Stashed changes
+from .models import Asistencia, Directivo, Profesor, Alumno, Grupo, Horario, Asistencia 
 
 class DirectivoForm(forms.ModelForm):
     class Meta:
@@ -14,9 +12,7 @@ class DirectivoForm(forms.ModelForm):
 class ProfesorForm(forms.ModelForm):
     class Meta:
         model = Profesor
-        fields = '__all__'
-<<<<<<< Updated upstream
-=======
+        fields = '__all__' 
 
 class AlumnoForm(forms.ModelForm):
     class Meta:
@@ -26,6 +22,15 @@ class AlumnoForm(forms.ModelForm):
 class GrupoForm(forms.ModelForm):
     class Meta:
         model = Grupo
-        fields = '__all__'  #['Nombre','Apellido,'Foto'] si quiero especificar campos de la base de datos 
+        fields = '__all__'
         
->>>>>>> Stashed changes
+class HorarioForm(forms.ModelForm):
+    class Meta:
+        model = Horario
+        fields = '__all__'
+        
+class AsistenciaForm(forms.ModelForm):
+    class Meta:
+        model = Asistencia
+        fields = '__all__'
+        
