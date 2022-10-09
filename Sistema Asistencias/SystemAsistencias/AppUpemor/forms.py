@@ -22,15 +22,15 @@ class AlumnoForm(forms.ModelForm):
 class GrupoForm(forms.ModelForm):
     class Meta:
         model = Grupo
-        fields = '__all__'
+        fields = '__all__'  #['Nombre','Apellido,'Foto'] si quiero especificar campos de la base de datos 
         
 class HorarioForm(forms.ModelForm):
     class Meta:
         model = Horario
-        fields = '__all__'
+        fields = '__all__'  #['Nombre','Apellido,'Foto'] si quiero especificar campos de la base de datos 
         
 class AsistenciaForm(forms.ModelForm):
     class Meta:
         model = Asistencia
-        fields = '__all__'
+        fields = '__all__'  #['Nombre','Apellido,'Foto'] si quiero especificar campos de la base de datos 
         

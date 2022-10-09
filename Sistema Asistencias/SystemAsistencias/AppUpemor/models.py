@@ -74,7 +74,7 @@ class Grupo(models.Model):
 
 class Horario(models.Model):
     id = models.AutoField( primary_key=True)
-    horaEntrada = models.TimeField(verbose_name='Hora de entrada')
+    horaEntrada = models.TimeField(verbose_name='Hora de entrada', null = True)
 
     def delete(self, using=None, keep_parents=False):
         super().delete()
@@ -85,6 +85,7 @@ class Asistencia(models.Model):
     apellidoP = models.CharField(max_length=100, verbose_name='Apellido P')
     apellidoM = models.CharField(max_length=100, verbose_name='Apellido M')
     grupo = models.CharField(max_length=100, verbose_name='Grupo')
+    status = models.CharField(max_length=100, verbose_name='Estatus')
 
     def delete(self, using=None, keep_parents=False):
         super().delete()
