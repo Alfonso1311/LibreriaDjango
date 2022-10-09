@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="../static/css/baseP.css">
+
+{% extends "baseP.html" %}
+
+{% block titulo %} Editar una asistecia {% endblock %}
+
+{% block contenido %} 
+    <div class="card">
+        <div class="card-header">
+            Editar informacion de la asistencias
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Datos de la asistecia</h4>
+
+            {% include 'asistencias/form.html' %}
+        </div>
+    </div>
+{% endblock %}

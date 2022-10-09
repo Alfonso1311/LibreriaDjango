@@ -1,0 +1,15 @@
+{% extends "baseP.html" %}
+
+{% block titulo %} Agregar nueva asistencia {% endblock %}
+
+{% block contenido %} 
+    <div class="card">
+        <div class="card-header">
+            Agregar una asistencia
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Datos de la asistencia </h4>
+            {% include 'asistencias/form.html' %}
+        </div>
+    </div>
+{% endblock %}

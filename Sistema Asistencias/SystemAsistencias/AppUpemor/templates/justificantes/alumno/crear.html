@@ -1,0 +1,16 @@
+{% extends "baseP.html" %}
+
+{% block titulo %} Agregar nuevo alumno {% endblock %}
+
+{% block contenido %} 
+    <div class="card">
+        <div class="card-header">
+            Agregar un alumno
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Datos del alumno</h4>
+
+            {% include 'usuarios/alumno/form.html' %}
+        </div>
+    </div>
+{% endblock %}

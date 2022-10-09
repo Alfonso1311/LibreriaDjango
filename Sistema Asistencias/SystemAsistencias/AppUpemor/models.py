@@ -1,5 +1,9 @@
+from asyncio.windows_events import NULL
+from distutils.command import upload
 from enum import auto
+from pickle import TRUE
 from tabnanny import verbose
+from unittest.util import _MAX_LENGTH
 from django.db import models
 from datetime import datetime, date
 
@@ -36,8 +40,6 @@ class Profesor(models.Model):
         return fila
 
     def delete(self, using=None, keep_parents=False):
-<<<<<<< Updated upstream
-=======
         super().delete()
 
 class Alumno(models.Model):
@@ -60,13 +62,29 @@ class Alumno(models.Model):
         super().delete()
 
 class Grupo(models.Model):
-    id = models.AutoField(max_length=15, primary_key=True)
-    cuatri = models.IntegerField(max_length=100, verbose_name='Cuatrimestre')
+    id = models.AutoField(primary_key=True)
+    cuatri = models.IntegerField(verbose_name='Cuatrimestre')
     grupo = models.CharField(max_length=100, verbose_name='Grupo')
     asignatura = models.CharField(max_length=100, verbose_name='Asignatura')
     profesor = models.CharField(max_length=100, verbose_name='Profesor')
     carrera = models.CharField(max_length=100, verbose_name='Carrera')
 
     def delete(self, using=None, keep_parents=False):
->>>>>>> Stashed changes
+        super().delete()
+
+class Horario(models.Model):
+    id = models.AutoField( primary_key=True)
+    horaEntrada = models.TimeField(verbose_name='Hora de entrada')
+
+    def delete(self, using=None, keep_parents=False):
+        super().delete()
+
+class Asistencia(models.Model):
+    id = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=100, verbose_name='Nombre')
+    apellidoP = models.CharField(max_length=100, verbose_name='Apellido P')
+    apellidoM = models.CharField(max_length=100, verbose_name='Apellido M')
+    grupo = models.CharField(max_length=100, verbose_name='Grupo')
+
+    def delete(self, using=None, keep_parents=False):
         super().delete()
