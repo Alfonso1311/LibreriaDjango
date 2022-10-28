@@ -1,0 +1,50 @@
+{% extends "baseP.html" %}
+
+{% block titulo %} Lista de Asignaturas {% endblock %}
+
+{% block contenido %} 
+
+<link rel="stylesheet" href="../static/css/baseP.css">
+
+    <div class="card">
+        <div class="card-header">
+            <a name="" id="" class="btn btn-warning" href="{% url 'crearAsig' %}" role="button"><i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Asignaturas</h4>
+            <div class="table-responsive">
+                <table class="table table-primary">
+                    <thead>
+                        <tr>
+                            <th scope="col">Clave</th>
+                            <th scope="col">Asignatura</th>
+                            <th scope="col">Horario_id</th>
+                            <th scope="col">Profesor_id</th>
+                            <th scope="col">grupo_id</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for asignatura in asignaturas %}
+                            <tr class="">
+                                <td>{{ asignatura.clave }}</td>
+                                <td>{{ asignatura.nomAsignatura }}</td>
+                                <td>{{ asignatura.horario_id }}</td>
+                                <td>{{ asignatura.profesor_id}}</td>
+                                <td>{{ asignatura.grupo_id}}</td>
+                                <td>
+                                    <a name="" id="" class="btn btn-info" href="{% url 'editarAsig' asignatura.clave%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a name="" id="" class="btn btn-danger" href="{% url 'eliminarAsig' asignatura.clave%}" role="button"><i class="fa-solid fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        <div class="card-footer text-muted">
+            
+        </div>
+    </div>
+{% endblock %}

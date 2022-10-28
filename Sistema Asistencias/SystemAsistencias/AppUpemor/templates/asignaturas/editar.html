@@ -1,14 +1,17 @@
+<link rel="stylesheet" href="../static/css/baseG.css">
+
 {% extends "baseP.html" %}
 
-{% block titulo %} Agregar nueva asignatura {% endblock %}
+{% block titulo %} Editar asignatura {% endblock %}
 
 {% block contenido %} 
     <div class="card">
         <div class="card-header">
-            Agregar una asignatura
+            Editar informacion de la asignatura
         </div>
         <div class="card-body">
             <h4 class="card-title">Datos de la asignatura</h4>
+
             {% include 'asignaturas/form.html' %}
         </div>
     </div>

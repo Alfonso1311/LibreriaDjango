@@ -1,7 +1,7 @@
 from dataclasses import fields
 from pyexpat import model
 from django import forms
-from .models import Asistencia, Directivo, Profesor, Alumno, Grupo, Horario, Asistencia, Justificante
+from .models import Asistencia, Directivo, Profesor, Alumno, Grupo, Horario, Asistencia, Justificante, Usuario, Asignatura
 
 class DirectivoForm(forms.ModelForm):
     class Meta:
@@ -37,4 +37,14 @@ class AsistenciaForm(forms.ModelForm):
 class JustificanteForm(forms.ModelForm):
     class Meta:
         model = Justificante
+        fields = '__all__'
+
+class UsuarioForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = '__all__'
+
+class AsignaturaForm(forms.ModelForm):
+    class Meta:
+        model = Asignatura
         fields = '__all__'

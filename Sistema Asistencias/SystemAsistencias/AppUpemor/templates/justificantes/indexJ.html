@@ -20,6 +20,7 @@
                             <th scope="col">FechaJusti</th>
                             <th scope="col">Motivo</th>
                             <th scope="col">Receta Médica</th>
+                            <th scope="col">Matricula_Alumno</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -30,6 +31,7 @@
                                 <td>{{ justificante.fechaJusti|date:'Y-m-d' }}</td>
                                 <td>{{ justificante.motivo }}</td>
                                 <td>{{ justificante.receta}}</td>
+                                <td>{{ justificante.matricula}}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarJ' justificante.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a name="" id="" class="btn btn-danger" href="{% url 'eliminarJ' justificante.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
