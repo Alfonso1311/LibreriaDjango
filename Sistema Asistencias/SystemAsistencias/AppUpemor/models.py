@@ -52,13 +52,14 @@ class Alumno(models.Model):
     carrera = models.CharField(max_length=100, verbose_name='Carrera')
     cuatri = models.IntegerField(verbose_name='Cuatrimestre')
     grupo = models.CharField(max_length=10, verbose_name='Grupo')
-    #foto = models.ImageField(upload_to='imagenes/', verbose_name='Imagen', null=True)
+    imagen = models.ImageField(upload_to='imagenes/', verbose_name='Imagen', null=True)
 
     def __str__(self):
         fila = "Nombre: " + self.nombre + " - " + " Apellido P: " + self.apellidoP
         return fila
 
     def delete(self, using=None, keep_parents=False):
+        self.imagen.storage.delete(self.imagen.name)
         super().delete()
 
 class Grupo(models.Model):
@@ -74,7 +75,7 @@ class Grupo(models.Model):
 
 class Horario(models.Model):
     id = models.AutoField( primary_key=True)
-    horaEntrada = models.TimeField(verbose_name='Hora de entrada', null = True)
+    horaEntrada = models.TimeField(auto_now=True, verbose_name='Hora de entrada')
 
     def delete(self, using=None, keep_parents=False):
         super().delete()
@@ -85,7 +86,19 @@ class Asistencia(models.Model):
     apellidoP = models.CharField(max_length=100, verbose_name='Apellido P')
     apellidoM = models.CharField(max_length=100, verbose_name='Apellido M')
     grupo = models.CharField(max_length=100, verbose_name='Grupo')
-    status = models.CharField(max_length=100, verbose_name='Estatus')
+
+    def delete(self, using=None, keep_parents=False):
+        super().delete()
+
+class Justificante(models.Model):
+    id = models.AutoField(primary_key=True)
+    fechaJusti = models.DateField(auto_now_add=False, auto_now=False, blank=True ,verbose_name='Fecha de justificante (yyyy-mm-dd)', null=True)
+    motivo = models.CharField(max_length=100, verbose_name='motivo')
+    receta = models.FileField(upload_to='archivos/', verbose_name='archivo', null=True)
+    
+    def __str__(self):
+        fila = "Nombre: " + self.nombre + " - " + " Apellido P: " + self.apellidoP
+        return fila
 
     def delete(self, using=None, keep_parents=False):
         super().delete()

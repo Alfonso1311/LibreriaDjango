@@ -25,7 +25,7 @@
                             <th scope="col">Carrera</th>
                             <th scope="col">Cuatrimestre</th>
                             <th scope="col">Grupo</th>
-                            <!--<th scope="col">Foto</th>-->
+                            <th scope="col">Foto</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -41,7 +41,9 @@
                                 <td>{{ alumno.carrera}}</td>
                                 <td>{{ alumno.cuatri}}</td>
                                 <td>{{ alumno.grupo}}</td>
-                               <!--<td>{{ alumno.foto}}</td>--> 
+                                <td>
+                                    <img src="{{ alumno.imagen.url }}" width="100" height="100">
+                                </td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarA' alumno.matricula%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a name="" id="" class="btn btn-danger" href="{% url 'eliminarA' alumno.matricula%}" role="button"><i class="fa-solid fa-trash"></i></a>
@@ -57,4 +59,5 @@
             
         </div>
     </div>
+
 {% endblock %}

@@ -21,7 +21,6 @@
                             <th scope="col">ApellidoP</th>
                             <th scope="col">ApellidoM</th>
                             <th scope="col">Grupo</th>
-                            <th scope="col">Estatus</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -33,7 +32,6 @@
                                 <td>{{ asistencia.apellidoP }}</td>
                                 <td>{{ asistencia.apellidoM }}</td>
                                 <td>{{ asistencia.grupo}}</td>
-                                <td>{{ asistencia.status}}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarAsis' asistencia.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a name="" id="" class="btn btn-danger" href="{% url 'eliminarAsis' asistencia.id%}" role="button"><i class="fa-solid fa-trash"></i></a>

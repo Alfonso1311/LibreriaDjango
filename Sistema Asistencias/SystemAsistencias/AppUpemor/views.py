@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Directivo, Profesor, Alumno, Grupo, Horario, Asistencia
-from .forms import DirectivoForm, ProfesorForm, AlumnoForm, GrupoForm, HorarioForm, AsistenciaForm
+from .models import Directivo, Profesor, Alumno, Grupo, Horario, Asistencia, Justificante
+from .forms import DirectivoForm, ProfesorForm, AlumnoForm, GrupoForm, HorarioForm, AsistenciaForm, JustificanteForm
 # Create your views here.
 
 def inicio(request):
@@ -60,7 +60,7 @@ def alumnos(request):
     return render(request, 'usuarios/alumno/indexA.html', {'alumnos': alumnos})
 
 def crearAlumno(request):
-    formulario = AlumnoForm(request.POST or None)
+    formulario = AlumnoForm(request.POST or None, request.FILES or None)
     if formulario.is_valid():
         formulario.save()
         return redirect('alumnos')
@@ -68,7 +68,7 @@ def crearAlumno(request):
 
 def editarAlumno(request, matricula):
     alumno = Alumno.objects.get(matricula=matricula)
-    formulario = AlumnoForm(request.POST or None, instance=alumno)
+    formulario = AlumnoForm(request.POST or None, request.FILES or None, instance=alumno)
     if formulario.is_valid():
         formulario.save()
         return redirect('alumnos')
@@ -150,4 +150,27 @@ def eliminarAsistencia(request, id):
     asistencia = Asistencia.objects.get(id=id)
     asistencia.delete()
     return redirect('asistencias')
-    
+
+def justificantes(request):
+    justificantes = Justificante.objects.all()
+    return render(request, 'justificantes/indexJ.html', {'justificantes': justificantes})
+
+def crearJustificante(request):
+    formulario = JustificanteForm(request.POST or None, request.FILES or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('justificantes')
+    return render(request, 'justificantes/crear.html', {'formulario': formulario})
+
+def editarJustificante(request, id):
+    justificante = Justificante.objects.get(id=id)
+    formulario = JustificanteForm(request.POST or None, request.FILES or None, instance=justificante)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('justificantes')
+    return render(request, 'justificantes/editar.html', {'formulario': formulario, 'justificante': justificante})
+
+def eliminarJustificante(request, id):
+    justificante = Justificante.objects.get(id=id)
+    justificante.delete()
+    return redirect('justificantes')

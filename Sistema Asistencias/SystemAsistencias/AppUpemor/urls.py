@@ -36,4 +36,9 @@ urlpatterns = [
     path('asistencia/crear', views.crearAsistencia, name='crearAsis'),
     path('asistencia/editar/<int:id>', views.editarAsistencia, name='editarAsis'),
     path('eliminarAsis/<int:id>', views.eliminarAsistencia, name='eliminarAsis'),
-]
+
+    path('justificantes', views.justificantes, name='justificantes'), 
+    path('justificante/crear', views.crearJustificante, name='crearJ'),
+    path('justificante/editar/<int:id>', views.editarJustificante, name='editarJ'),
+    path('eliminarJ/<int:id>', views.eliminarJustificante, name='eliminarJ'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
