@@ -1,10 +1,10 @@
-{% extends "baseP.html" %}
+{% extends "baseD.html" %}
 
 {% block titulo %} Lista de Profesores {% endblock %}
 
 {% block contenido %} 
 
-<link rel="stylesheet" href="../static/css/baseP.css">
+<link rel="stylesheet" href="../static/css/baseD.css">
 
     <div class="card">
         <div class="card-header">
@@ -40,6 +40,10 @@
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarP' profesor.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a name="" id="" class="btn btn-danger" href="{% url 'eliminarP' profesor.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
                                 </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="8">No hay registros</td>
                             </tr>
                         {% endfor %}
                     </tbody>

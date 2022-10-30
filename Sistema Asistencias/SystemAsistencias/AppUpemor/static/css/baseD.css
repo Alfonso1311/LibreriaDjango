@@ -1,3 +1,38 @@
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+body{
+    display: flex;
+}
+
+header{
+    background-color: #1c064e;
+    width: 25%;
+    height: 100vh;
+}
+
+header > i{
+    color: #fff;
+    font-size: 2rem;
+    float: right;
+    margin: 0.5em 0.5em 0 0;
+    cursor: pointer;
+}
+
+header > i:hover{
+    color: #ffb731;
+}
+
+
+.userContainer {
+    display: flex;
+    align-items: center;
+    padding: 2em 0 1.5em 1em;
+}
+
 .iconProfile{
     width: 4rem;
     height: 4rem;
@@ -14,16 +49,71 @@
     font-size: 2em;
 }
 
-.navbar{
-    background-color: #1c064e;
+.user{
+    margin-left: 1em;
 }
 
-.nav a{
+.user i{
     color: #fff;
 }
 
-.nav a:hover{
+.user h3{
+    color: #fff;
+    font-size: 1.3em;
+}
+
+.userType{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin: auto 0;
+}
+
+.userType i{
+    color: #FAFF0D;
+}
+
+.userType h3{
+    font-size: 1em;
+    margin-left: 0.5em;
+}
+
+nav{
+    padding: 0;
+    width: 100%;
+}
+
+.navbar ul{
+    width: 100%;
+    list-style: none;
+    padding: 0;
+}
+
+.navbar ul li{
+    padding: 1.2em 0 1.2em 1.2em;
+    width: 100%;
+    font-size: 1em;
+}
+
+.navbar ul li > i{
+    color: #FAFF0D;
+}
+
+.active{
+    background-color: #58008E;
+}
+
+.navbar a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar a:hover{
     color: #ffb731;
+}
+
+.exit{
+    margin-top: 29vh;
 }
 
 .card-header{
@@ -33,4 +123,8 @@
 
 .card-header a{
     color: #1c064e;
+}
+
+.container{
+    padding-top: 5vh;
 }
