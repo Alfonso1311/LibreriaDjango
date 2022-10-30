@@ -1,15 +1,15 @@
 {% extends "baseP.html" %}
 
-{% block titulo %} Agregar nuevo grupo {% endblock %}
+{% block titulo %} Agregar nueva asignatura {% endblock %}
 
 {% block contenido %} 
     <div class="card">
         <div class="card-header">
-            Agregar un grupo
+            Agregar una asignatura
         </div>
         <div class="card-body">
-            <h4 class="card-title">Datos del grupo</h4>
-            {% include 'grupos/form.html' %}
+            <h4 class="card-title">Datos de la asignatura</h4>
+            {% include 'asignaturas/form.html' %}
         </div>
     </div>
 {% endblock %}

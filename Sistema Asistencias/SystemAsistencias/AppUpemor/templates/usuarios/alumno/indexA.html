@@ -1,10 +1,10 @@
-{% extends "baseP.html" %}
+{% extends "baseD.html" %}
 
 {% block titulo %} Lista de Profesores {% endblock %}
 
 {% block contenido %} 
 
-<link rel="stylesheet" href="../static/css/baseP.css">
+<link rel="stylesheet" href="../static/css/baseD.css">
 
     <div class="card">
         <div class="card-header">
@@ -22,10 +22,8 @@
                             <th scope="col">ApellidoM</th>
                             <th scope="col">FechaNac</th>
                             <th scope="col">Correo</th>
-                            <th scope="col">Carrera</th>
-                            <th scope="col">Cuatrimestre</th>
-                            <th scope="col">Grupo</th>
-                            <!--<th scope="col">Foto</th>-->
+                            <th scope="col">Foto</th>
+                            <th scope="col">Grupo_ID</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -38,14 +36,18 @@
                                 <td>{{ alumno.apellidoM }}</td>
                                 <td>{{ alumno.fechaNac|date:'Y-m-d' }}</td>
                                 <td>{{ alumno.correo }}</td>
-                                <td>{{ alumno.carrera}}</td>
-                                <td>{{ alumno.cuatri}}</td>
+                                <td>
+                                    <img src="{{ alumno.imagen.url }}" width="70" height="70">
+                                </td>
                                 <td>{{ alumno.grupo}}</td>
-                               <!--<td>{{ alumno.foto}}</td>--> 
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarA' alumno.matricula%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a name="" id="" class="btn btn-danger" href="{% url 'eliminarA' alumno.matricula%}" role="button"><i class="fa-solid fa-trash"></i></a>
                                 </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="9">No hay registros</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -57,4 +59,5 @@
             
         </div>
     </div>
+
 {% endblock %}

@@ -15,19 +15,46 @@
 </head>
 
 <body>
-    <div class="iconProfile">
-        <i class="fa-solid fa-user"></i>
-    </div>
-
-    <nav class="navbar navbar-expand navbar-light">
-        <div class="nav navbar-nav">
-            <a class="nav-item nav-link" href="{% url 'inicio' %}">Inicio</a>
-            <a class="nav-item nav-link" href="{% url 'directivos' %}">Directivos</a>
-            <a class="nav-item nav-link" href="{% url 'profesores' %}">Docentes</a>
-            <a class="nav-item nav-link" href="#">Estudiantes</a>
-            <a class="nav-item nav-link" href="#">Reportes PDF</a>
+    <header>
+        <i class="fa-solid fa-bars"></i>
+        <div class="userContainer">
+            <div class="iconProfile">
+                <i class="fa-solid fa-user"></i>        
+            </div>
+            <div class="user">
+                <h3>User123</h3>
+                <div class="userType">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <h3>Directivo</h3>
+                </div>
+            </div>
         </div>
-    </nav>
+
+        <nav class="navbar navbar-expand navbar-light">
+            <ul>
+                <li class="active">
+                    <i class="fa-solid fa-house"></i>
+                    <a href="{% url 'inicioD' %}">Inicio</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-user-gear"></i>
+                    <a href="{% url 'directivos' %}">Directivos</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <a href="{% url 'profesores' %}">Profesores</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <a href="{% url 'alumnos' %}">Alumnos</a> 
+                </li>
+                <li class="exit">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <a href="{% url 'inicio' %}">Cerrar Sesión</a> 
+                </li>
+            </ul>
+        </nav>
+    </header>
 
     <div class="container">
         <div class="row">

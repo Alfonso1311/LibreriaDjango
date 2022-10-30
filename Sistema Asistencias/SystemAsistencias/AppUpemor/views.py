@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Directivo, Profesor, Alumno, Grupo, Horario, Asistencia
-from .forms import DirectivoForm, ProfesorForm, AlumnoForm, GrupoForm, HorarioForm, AsistenciaForm
+from .models import Directivo, Profesor, Alumno, Grupo, Horario, Asistencia, Justificante, Usuario, Asignatura
+from .forms import DirectivoForm, ProfesorForm, AlumnoForm, GrupoForm, HorarioForm, AsistenciaForm, JustificanteForm, UsuarioForm, AsignaturaForm
 # Create your views here.
 
 def inicio(request):
-    return render(request, 'paginas/inicioD.html')
+    return render(request, 'home/inicio.html')
+
+def inicioD(request):
+    return render(request, 'home/inicioD.html')
 
 def directivos(request):
     directivos = Directivo.objects.all()
@@ -60,7 +63,7 @@ def alumnos(request):
     return render(request, 'usuarios/alumno/indexA.html', {'alumnos': alumnos})
 
 def crearAlumno(request):
-    formulario = AlumnoForm(request.POST or None)
+    formulario = AlumnoForm(request.POST or None, request.FILES or None)
     if formulario.is_valid():
         formulario.save()
         return redirect('alumnos')
@@ -68,7 +71,7 @@ def crearAlumno(request):
 
 def editarAlumno(request, matricula):
     alumno = Alumno.objects.get(matricula=matricula)
-    formulario = AlumnoForm(request.POST or None, instance=alumno)
+    formulario = AlumnoForm(request.POST or None, request.FILES or None, instance=alumno)
     if formulario.is_valid():
         formulario.save()
         return redirect('alumnos')
@@ -150,4 +153,75 @@ def eliminarAsistencia(request, id):
     asistencia = Asistencia.objects.get(id=id)
     asistencia.delete()
     return redirect('asistencias')
-    
+
+def justificantes(request):
+    justificantes = Justificante.objects.all()
+    return render(request, 'justificantes/indexJ.html', {'justificantes': justificantes})
+
+def crearJustificante(request):
+    formulario = JustificanteForm(request.POST or None, request.FILES or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('justificantes')
+    return render(request, 'justificantes/crear.html', {'formulario': formulario})
+
+def editarJustificante(request, id):
+    justificante = Justificante.objects.get(id=id)
+    formulario = JustificanteForm(request.POST or None, request.FILES or None, instance=justificante)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('justificantes')
+    return render(request, 'justificantes/editar.html', {'formulario': formulario, 'justificante': justificante})
+
+def eliminarJustificante(request, id):
+    justificante = Justificante.objects.get(id=id)
+    justificante.delete()
+    return redirect('justificantes')
+
+def usuarios(request):
+    usuarios = Usuario.objects.all()
+    return render(request, 'usuarios/usuario/indexU.html', {'usuarios': usuarios})
+
+def crearUsuario(request):
+    formulario = UsuarioForm(request.POST or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('usuarios')
+    return render(request, 'usuarios/usuario/crear.html', {'formulario': formulario})
+
+def editarUsuario(request, id):
+    usuario = Usuario.objects.get(id=id)
+    formulario = UsuarioForm(request.POST or None, instance=usuario)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('usuarios')
+    return render(request, 'usuarios/usuario/editar.html', {'formulario': formulario, 'usuario': usuario})
+
+def eliminarUsuario(request, id):
+    usuario = Usuario.objects.get(id=id)
+    usuario.delete()
+    return redirect('usuarios')
+
+def asignaturas(request):
+    asignaturas = Asignatura.objects.all()
+    return render(request, 'asignaturas/indexAsig.html', {'asignaturas': asignaturas})
+
+def crearAsignatura(request):
+    formulario = AsignaturaForm(request.POST or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('asignaturas')
+    return render(request, 'asignaturas/crear.html', {'formulario': formulario})
+
+def editarAsignatura(request, clave):
+    asignatura = Asignatura.objects.get(clave=clave)
+    formulario = AsignaturaForm(request.POST or None, instance=asignatura)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('asignaturas')
+    return render(request, 'asignaturas/editar.html', {'formulario': formulario, 'asignatura': asignatura})
+
+def eliminarAsignatura(request, clave):
+    asignatura = Asignatura.objects.get(clave=clave)
+    asignatura.delete()
+    return redirect('asignaturas')

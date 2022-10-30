@@ -4,14 +4,17 @@
 
 {% block contenido %} 
 
-<link rel="stylesheet" href="../static/css/baseD.css">
+<link rel="stylesheet" href="../static/css/indexD.css">
 
     <div class="card">
         <div class="card-header">
+            <div class="titleTypeUser">
+                <i class="fa-solid fa-user-gear"></i>
+                <h4 class="">Directivos</h4>
+            </div>
             <a name="" id="" class="btn btn-warning" href="{% url 'crear' %}" role="button"><i class="fa-solid fa-circle-plus"></i> Nuevo</a>
         </div>
         <div class="card-body">
-            <h4 class="card-title">Directivos</h4>
             <div class="table-responsive">
                 <table class="table table-primary">
                     <thead>
@@ -40,6 +43,10 @@
                                     <a name="" id="" class="btn btn-info" href="{% url 'editar' directivo.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a name="" id="" class="btn btn-danger" href="{% url 'eliminar' directivo.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
                                 </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="8">No hay registros</td>
                             </tr>
                         {% endfor %}
                     </tbody>

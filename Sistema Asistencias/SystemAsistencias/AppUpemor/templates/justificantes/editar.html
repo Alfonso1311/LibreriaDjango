@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="../static/css/baseP.css">
+
+{% extends "baseP.html" %}
+
+{% block titulo %} Editar justificante {% endblock %}
+
+{% block contenido %} 
+    <div class="card">
+        <div class="card-header">
+            Editar informacion del justificante
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Datos del justificante</h4>
+
+            {% include 'justificantes/form.html' %}
+        </div>
+    </div>
+{% endblock %}
