@@ -5,10 +5,13 @@ from .forms import DirectivoForm, ProfesorForm, AlumnoForm, GrupoForm, HorarioFo
 # Create your views here.
 
 def inicio(request):
-    return render(request, 'home/inicio.html')
+    return render(request, 'paginas/inicio.html')
 
 def inicioD(request):
-    return render(request, 'home/inicioD.html')
+    return render(request, 'usuarios/directivo/inicioD.html')
+
+def inicioP(request):
+    return render(request, 'usuarios/profesor/inicioP.html')
 
 def directivos(request):
     directivos = Directivo.objects.all()
