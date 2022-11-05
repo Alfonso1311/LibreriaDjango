@@ -7,7 +7,8 @@ from django.contrib.staticfiles.urls import static
 urlpatterns = [
     
     path('', views.inicio, name='inicio'), # El nombre es para acceder a una url con ese nombre
-    path('home', views.inicioD, name='inicioD'),
+    path('directivo', views.inicioD, name='inicioD'),
+    path('profesor', views.inicioP, name='inicioP'),
 
     path('directivos', views.directivos, name='directivos'),
     path('directivo/crear', views.crearDirectivo, name='crear'),
