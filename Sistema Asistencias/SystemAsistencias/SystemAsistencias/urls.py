@@ -21,4 +21,5 @@ from django.urls import include # Incluir las urls de la aplicacion
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('AppUpemor.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

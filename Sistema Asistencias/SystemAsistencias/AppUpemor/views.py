@@ -1,8 +1,16 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib import messages
 from django.http import HttpResponse
 from .models import Directivo, Profesor, Alumno, Grupo, Horario, Asistencia, Justificante, Usuario, Asignatura
 from .forms import DirectivoForm, ProfesorForm, AlumnoForm, GrupoForm, HorarioForm, AsistenciaForm, JustificanteForm, UsuarioForm, AsignaturaForm
 # Create your views here.
+
+def salir(request):
+    logout(request)
+    return redirect('login/')
 
 def inicio(request):
     return render(request, 'paginas/inicio.html')
@@ -182,29 +190,54 @@ def eliminarJustificante(request, id):
     return redirect('justificantes')
 
 def usuarios(request):
-    usuarios = Usuario.objects.all()
+    usuarios = User.objects.all()
     return render(request, 'usuarios/usuario/indexU.html', {'usuarios': usuarios})
 
 def crearUsuario(request):
-    formulario = UsuarioForm(request.POST or None)
-    if formulario.is_valid():
-        formulario.save()
-        return redirect('usuarios')
+    if request.method == 'POST':
+        formulario = UsuarioForm(request.POST)
+        if formulario.is_valid():
+            username = formulario.cleaned_data['username']
+            messages.success(request, f'Usuario {username} creado correctamente')
+            formulario.save()
+            return redirect('usuarios')
+    else:
+        formulario = UsuarioForm()
     return render(request, 'usuarios/usuario/crear.html', {'formulario': formulario})
 
 def editarUsuario(request, id):
-    usuario = Usuario.objects.get(id=id)
+    usuario = User.objects.get(id=id)
     formulario = UsuarioForm(request.POST or None, instance=usuario)
     if formulario.is_valid():
+        username = formulario.cleaned_data['username']
+        messages.success(request, f'Usuario {username} modificado correctamente')
         formulario.save()
         return redirect('usuarios')
     return render(request, 'usuarios/usuario/editar.html', {'formulario': formulario, 'usuario': usuario})
 
 def eliminarUsuario(request, id):
-    usuario = Usuario.objects.get(id=id)
+    usuario = User.objects.get(id=id)
     usuario.delete()
     return redirect('usuarios')
+'''
+class SignUpView(CreateView):
+    model = Usuario
+    form_class = SignUpForm
 
+    def form_valid(self, form):
+        
+        #En este parte, si el formulario es valido guardamos lo que se obtiene de él y usamos authenticate para que el usuario incie sesión luego de haberse registrado y lo redirigimos al index
+        
+        form.save()
+        usuario = form.cleaned_data.get('nomUsuario')
+        password = form.cleaned_data.get('password')
+        usuario = authenticate(username=usuario, password=password)
+        login(self.request, usuario)
+        return redirect('/')
+
+class BienvenidaView(TemplateView):
+   template_name = 'usuarios/directivo/inicioD.html'
+'''
 def asignaturas(request):
     asignaturas = Asignatura.objects.all()
     return render(request, 'asignaturas/indexAsig.html', {'asignaturas': asignaturas})

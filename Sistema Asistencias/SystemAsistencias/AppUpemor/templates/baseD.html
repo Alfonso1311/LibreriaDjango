@@ -19,13 +19,14 @@
         <i class="fa-solid fa-bars"></i>
         <div class="userContainer">
             <div class="iconProfile">
-                <i class="fa-solid fa-user"></i>     
+                <!--<i class="fa-solid fa-user"></i> -->
+                <img class="btn-md fa-user" src="../../user_profile/Abs_logo.png" alt="" style="border-radius:50%;">    
             </div>
             <div class="user">
-                <h3>User123</h3>
+                <h3>{{ user.username }}</h3>
                 <div class="userType">
                     <i class="fa-solid fa-user-gear"></i>
-                    <h3>Directivo</h3>
+                    <h3>{{ user.userType }}</h3>
                 </div>
             </div>
         </div>
@@ -50,7 +51,7 @@
                 </li>
                 <li class="exit">
                     <i class="fa-solid fa-right-from-bracket"></i>
-                    <a href="{% url 'inicio' %}">Cerrar Sesión</a> 
+                    <a href="{% url 'salir' %}">Cerrar Sesión</a> 
                 </li>
             </ul>
         </nav>
@@ -58,6 +59,13 @@
 
     <div class="container">
         <div class="row">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
         <div class="col-12">
             <br>
             {% block contenido %} {% endblock %}

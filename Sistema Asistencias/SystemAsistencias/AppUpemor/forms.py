@@ -1,6 +1,8 @@
 from dataclasses import fields
 from pyexpat import model
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from .models import Asistencia, Directivo, Profesor, Alumno, Grupo, Horario, Asistencia, Justificante, Usuario, Asignatura
 
 class DirectivoForm(forms.ModelForm):
@@ -39,10 +41,21 @@ class JustificanteForm(forms.ModelForm):
         model = Justificante
         fields = '__all__'
 
-class UsuarioForm(forms.ModelForm):
+class UsuarioForm(UserCreationForm):
+    password1: forms.CharField(label='Contraseña', widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    password2: forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    
+
+    class Meta:
+        model = User
+        fields = ['username', 'password1', 'password2']
+
+'''
+class SignUpView(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = '__all__'
+'''
 
 class AsignaturaForm(forms.ModelForm):
     class Meta:

@@ -5,7 +5,12 @@
 {% block contenido %} 
 
 <link rel="stylesheet" href="../static/css/inicioD.css">
-
+<!--    {% if user.is_authenticated %}
+        <h1>Hola {{ user.username }}</h1>
+    {% else %}
+        <a href="#">Registrate</a>
+    {% endif %}
+-->
     <div class="row row-cols-1 row-cols-md-3 g-3 container-inicio">
         <a href="{% url 'directivos' %}">
             <div class="col">

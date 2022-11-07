@@ -130,5 +130,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static") #archivo estatico CSS
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '')
+MEDIA_URL = '/user_profile/'
 MEDIA_URL = '/imagenes/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/directivo'
+
+#AUTH_USER_MODEL = 'usuarios.Usuario'

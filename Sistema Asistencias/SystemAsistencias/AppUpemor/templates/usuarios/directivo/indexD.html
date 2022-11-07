@@ -20,12 +20,14 @@
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
+                            <th scope="col">Usuario</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellido P</th>
                             <th scope="col">Apellido M</th>
                             <th scope="col">Fecha Nac</th>
                             <th scope="col">Correo</th>
                             <th scope="col">Area</th>
+                            <th scope="col">Tipo</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -33,12 +35,14 @@
                         {% for directivo in directivos %}
                             <tr class="">
                                 <td>{{ directivo.id }}</td>
+                                <td>{{ directivo.user.username }}</td>
                                 <td>{{ directivo.nombre }}</td>
                                 <td>{{ directivo.apellidoP }}</td>
                                 <td>{{ directivo.apellidoM }}</td>
                                 <td>{{ directivo.fechaNac|date:'Y-m-d' }}</td>
                                 <td>{{ directivo.correo }}</td>
                                 <td>{{ directivo.area }}</td>
+                                <td>{{ directivo.userType }}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editar' directivo.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a name="" id="" class="btn btn-danger" href="{% url 'eliminar' directivo.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
