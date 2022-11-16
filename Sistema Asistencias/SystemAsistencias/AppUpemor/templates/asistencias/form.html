@@ -1,9 +1,27 @@
-<link rel="stylesheet" href="../static/css/baseAsis.css">
+<link rel="stylesheet" href="../static/css/base.css">
 <form enctype="multipart/form-data" method="post">
   {% csrf_token %}
   {% for campo in formulario %}
     <div class="mb-3">
       <label for="" class="form-label">{{ campo.label }}</label>
+      {% if campo.name == 'fechaReg' %}
+        <input 
+          type="date"
+          class="form-control" 
+          name="{{ campo.name }}" 
+          id="" 
+          aria-describedby="helpId" 
+          placeholder="{{ campo.label }}" 
+          value=""
+        />
+        {% elif campo.name == 'status' %}
+      <select name="status" id="status" class="form-select">
+        <option value="">------- SELECCIONE -------</option>
+        <option value="Justificado">Justificado</option>
+        <option value="Asistencia">Asistencia</option>
+        <option value="Falta">Falta</option>
+      </select>
+      {% else %}
       <input 
         type="{{ campo.field.widget.input_type }}"
         class="form-control" 
@@ -11,8 +29,9 @@
         id="" 
         aria-describedby="helpId" 
         placeholder="{{ campo.label }}" 
-        value="{{ campo.value }}"
+        value=""
       />
+    {% endif %}
     </div>
     <div class="col-12 help-text">{{ campo.errors }}</div>
   {% endfor %}

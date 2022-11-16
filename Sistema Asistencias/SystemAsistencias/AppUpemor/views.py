@@ -3,7 +3,18 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+'''
+from gettext import install
+from unittest import result
+import cv2
+import face_recognition
+'''
+#import subprocess
+from subprocess import check_output
 from django.http import HttpResponse
+from openpyxl import Workbook
+from openpyxl.drawing.image import Image
+from openpyxl.styles import Font, Alignment, Border, Side, PatternFill
 from .models import Directivo, Profesor, Alumno, Grupo, Horario, Asistencia, Justificante, Usuario, Asignatura
 from .forms import DirectivoForm, ProfesorForm, AlumnoForm, GrupoForm, HorarioForm, AsistenciaForm, JustificanteForm, UsuarioForm, AsignaturaForm
 # Create your views here.
@@ -20,6 +31,9 @@ def inicioD(request):
 
 def inicioP(request):
     return render(request, 'usuarios/profesor/inicioP.html')
+
+def inicioA(request):
+    return render(request, 'usuarios/alumno/inicioA.html')
 
 def directivos(request):
     directivos = Directivo.objects.all()
@@ -219,25 +233,7 @@ def eliminarUsuario(request, id):
     usuario = User.objects.get(id=id)
     usuario.delete()
     return redirect('usuarios')
-'''
-class SignUpView(CreateView):
-    model = Usuario
-    form_class = SignUpForm
 
-    def form_valid(self, form):
-        
-        #En este parte, si el formulario es valido guardamos lo que se obtiene de él y usamos authenticate para que el usuario incie sesión luego de haberse registrado y lo redirigimos al index
-        
-        form.save()
-        usuario = form.cleaned_data.get('nomUsuario')
-        password = form.cleaned_data.get('password')
-        usuario = authenticate(username=usuario, password=password)
-        login(self.request, usuario)
-        return redirect('/')
-
-class BienvenidaView(TemplateView):
-   template_name = 'usuarios/directivo/inicioD.html'
-'''
 def asignaturas(request):
     asignaturas = Asignatura.objects.all()
     return render(request, 'asignaturas/indexAsig.html', {'asignaturas': asignaturas})
@@ -261,3 +257,213 @@ def eliminarAsignatura(request, clave):
     asignatura = Asignatura.objects.get(clave=clave)
     asignatura.delete()
     return redirect('asignaturas')
+'''
+def abrirReconocimiento(request):
+    #Imagen a comparar
+    image = cv2.imread("Images\Alfonso.jpg")
+    face_loc = face_recognition.face_locations(image)[0]
+    #print("face_loc:", face_loc)
+    face_image_encodings = face_recognition.face_encodings(image, known_face_locations=[face_loc])[0]
+
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+
+    while True:
+        ret, frame = cap.read()
+        if ret == False: break
+        frame = cv2.flip(frame, 1)
+
+        face_locations = face_recognition.face_locations(frame)
+        if face_locations != []:
+            for face_location in face_locations:
+                face_frame_encodings = face_recognition.face_encodings(frame, known_face_locations=[face_location])[0]
+                result = face_recognition.compare_faces([face_frame_encodings], face_image_encodings)
+                print("Result:", result)
+
+                if result[0] == True:
+                    text = "Alfonso"
+                    color = (125, 220, 0)
+                else:
+                    text = "Desconocido"
+                    color = (50, 50, 255)
+
+                cv2.rectangle(frame, (face_location[3], face_location[2]), (face_location[1], face_location[2] + 30), 2)
+                cv2.rectangle(frame, (face_location[3], face_location[0]), (face_location[1], face_location[2]), color, 2)
+                cv2.putText(frame, text, (face_location[3], face_location[2] + 20), 2, 0.7, (255, 255, 255), 1)
+
+        cv2.imshow("Frame", frame)
+        k = cv2.waitKey(1)
+        if k == 27 & 0xFF:
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+'''
+def reportes(request):
+    return render(request, 'reportes/reporte.html')
+
+def generarReporte(request):
+    campo = request.GET.get('campo')
+    query = Asistencia.objects.filter(status = campo)
+    wb = Workbook()
+    bandera = True
+    controlador = 8
+    cont = 1
+    ws = wb.active
+    
+    ws.title = 'Hoja'+str(cont)
+    for i in query:
+        if bandera:
+            ws = wb.active
+            ws.title = 'Hoja'+str(cont)
+            #bandera = False
+        '''else:
+            ws = wb.create_sheet('Hoja'+str(cont))
+        '''
+        #Crear imagen en la hoja
+        ws.merge_cells('B1:B4')
+
+        imag = Image('C:/Users/alfon/Desktop/Proyecto Estancia II/Sistema Asistencias/SystemAsistencias/AppUpemor/templates/reportes/img/logo.png')
+        imag.width = 100
+        imag.height = 100
+        ws.add_image(imag, 'B1')
+
+
+        #Crear titulo en la hoja
+        ws['C1'].alignment = Alignment(horizontal='center', vertical='center')
+        ws['C1'].font = Font(name='Calibri', bold=True, size=20)
+        ws['C1'].border = Border(left = Side(border_style='thin', color='FF000000'), right = Side(border_style='thin'),
+                                    top = Side(border_style='thin'), bottom = Side(border_style='thin'))
+        ws['C1'].fill = PatternFill(start_color='FFC000', end_color='FFC000', fill_type='solid')
+        ws['C1'] = 'Reporte de asistencia'
+
+        #cambiar caracteristicas de las celdas
+        ws.merge_cells('C1:G1')
+
+        ws.row_dimensions[1].height = 30
+
+        ws.column_dimensions['B'].width = 20
+        ws.column_dimensions['C'].width = 20
+        ws.column_dimensions['D'].width = 20
+        ws.column_dimensions['E'].width = 20
+
+        #Crear encabezados o cabeceras
+        ws.row_dimensions[3].height = 20
+
+        ws['B7'].alignment = Alignment(horizontal='center', vertical='center')
+        ws['B7'].font = Font(name='Calibri', bold=True, size=10)
+        ws['B7'].border = Border(left = Side(border_style='thin', color='FF000000'), right = Side(border_style='thin'),
+                                    top = Side(border_style='thin'), bottom = Side(border_style='thin'))
+        ws['B7'].fill = PatternFill(start_color='66CFCC', end_color='66CFCC', fill_type='solid')
+        ws['B7'] = 'Matricula'
+
+        ws['C7'].alignment = Alignment(horizontal='center', vertical='center')
+        ws['C7'].font = Font(name='Calibri', bold=True, size=10)
+        ws['C7'].border = Border(left = Side(border_style='thin', color='FF000000'), right = Side(border_style='thin'),
+                                    top = Side(border_style='thin'), bottom = Side(border_style='thin'))
+        ws['C7'].fill = PatternFill(start_color='66CFCC', end_color='66CFCC', fill_type='solid')
+        ws['C7'] = 'Alumno'
+
+        ws['D7'].alignment = Alignment(horizontal='center', vertical='center')
+        ws['D7'].font = Font(name='Calibri', bold=True, size=10)
+        ws['D7'].border = Border(left = Side(border_style='thin', color='FF000000'), right = Side(border_style='thin'),
+                                    top = Side(border_style='thin'), bottom = Side(border_style='thin'))
+        ws['D7'].fill = PatternFill(start_color='66CFCC', end_color='66CFCC', fill_type='solid')
+        ws['D7'] = 'Apellidos'
+
+        ws['E7'].alignment = Alignment(horizontal='center', vertical='center')
+        ws['E7'].font = Font(name='Calibri', bold=True, size=10)
+        ws['E7'].border = Border(left = Side(border_style='thin', color='FF000000'), right = Side(border_style='thin'),
+                                    top = Side(border_style='thin'), bottom = Side(border_style='thin'))
+        ws['E7'].fill = PatternFill(start_color='66CFCC', end_color='66CFCC', fill_type='solid')
+        ws['E7'] = 'Status'
+
+        ws['F7'].alignment = Alignment(horizontal='center', vertical='center')
+        ws['F7'].font = Font(name='Calibri', bold=True, size=10)
+        ws['F7'].border = Border(left = Side(border_style='thin', color='FF000000'), right = Side(border_style='thin'),
+                                    top = Side(border_style='thin'), bottom = Side(border_style='thin'))
+        ws['F7'].fill = PatternFill(start_color='66CFCC', end_color='66CFCC', fill_type='solid')
+        ws['F7'] = 'Fecha'
+
+        #Generar los datos en el reporte
+        #ws['B'+str(controlador)].alignment = Alignment(horizontal='center', vertical='center')
+        #ws.merge_cells('C1:G1')
+        ws.cell(row=controlador, column=2).alignment = Alignment(horizontal='center')
+        ws.cell(row=controlador, column=2).font = Font(name='Calibri', size=10)
+        ws.cell(row=controlador, column=2).border = Border(left = Side(border_style='thin', color='FF000000'), right = Side(border_style='thin'),
+                                    top = Side(border_style='thin'), bottom = Side(border_style='thin'))
+        ws.cell(row=controlador, column=2).value = i.id_alumno.matricula
+
+
+        ws.cell(row=controlador, column=3).alignment = Alignment(horizontal='center')
+        ws.cell(row=controlador, column=3).font = Font(name='Calibri', size=10)
+        ws.cell(row=controlador, column=3).border = Border(left = Side(border_style='thin', color='FF000000'), right = Side(border_style='thin'),
+                                    top = Side(border_style='thin'), bottom = Side(border_style='thin'))
+        ws.cell(row=controlador, column=3).value = i.id_alumno.nombre
+
+
+        ws.cell(row=controlador, column=4).alignment = Alignment(horizontal='center')
+        ws.cell(row=controlador, column=4).font = Font(name='Calibri', size=10)
+        ws.cell(row=controlador, column=4).border = Border(left = Side(border_style='thin', color='FF000000'), right = Side(border_style='thin'),
+                                    top = Side(border_style='thin'), bottom = Side(border_style='thin'))
+        ws.cell(row=controlador, column=4).value = i.id_alumno.apellidoP + ' ' + i.id_alumno.apellidoM
+
+
+        ws.cell(row=controlador, column=5).alignment = Alignment(horizontal='center')
+        ws.cell(row=controlador, column=5).font = Font(name='Calibri', size=10)
+        ws.cell(row=controlador, column=5).border = Border(left = Side(border_style='thin', color='FF000000'), right = Side(border_style='thin'),
+                                    top = Side(border_style='thin'), bottom = Side(border_style='thin'))
+        ws.cell(row=controlador, column=5).value = i.status
+
+
+        ws.cell(row=controlador, column=6).alignment = Alignment(horizontal='center')
+        ws.cell(row=controlador, column=6).font = Font(name='Calibri', size=10)
+        ws.cell(row=controlador, column=6).border = Border(left = Side(border_style='thin', color='FF000000'), right = Side(border_style='thin'),
+                                    top = Side(border_style='thin'), bottom = Side(border_style='thin'))
+        ws.cell(row=controlador, column=6).value = i.fechaReg
+
+        controlador += 1
+        
+        cont += 1
+
+    #establecer el nombre de mi archivo 
+    nombre_archivo = "Reporte.xlsx"
+    #definir el tipo de respuesta que voy a tener
+    response = HttpResponse(content_type="application/ms-excel")
+    content = "attachment; filename = {0}".format(nombre_archivo)
+    response['Content-Disposition'] = content
+    wb.save(response)
+    return response
+    
+'''
+def backup(request):
+    subprocess.call(['mysqldump', '--user=root', '--password=1234', '--host=localhost', 'asistencia', '>', 'C:/Users/Usuario/Desktop/backup.sql'])
+    subprocess.Popen(['C:/Users/Usuario/Desktop/backup.sql'])
+
+respaldo = subprocess.Popen(['C:/Users/Usuario/Desktop/backup.sql'], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+stdout, stderr = respaldo.communicate()
+print(stdout)
+print(stderr)
+'''
+'''
+def restaurar(request):
+    subprocess.Popen("C:/wamp64/bin/mysql/mysql5.7.36/bin/mysqldump -h localhost -u [ MySQL user, p. root ] -c [ upemor ] > sqldump.sql", shell=True)
+    return render(request, 'usuarios/directivo/inicioD.html')
+'''
+
+'''
+def backup(request):
+    subprocess.Popen("mysqldump -u root -p12345 victimas > /home/proyecto/backup.sql")
+    subprocess.Popen("gzip -c /home/proyecto/backup.sql > /home/proyecto/backup.gz")
+    dataf = open('/home/proyecto/backups/backup.gz', 'r')
+    return HttpResponse(dataf.read(), mimetype='application/x-gzip')
+
+
+solucion...
+subprocess.Popen("mysqldump -u root -p12345 victimas > /home/proyecto/backup.sql", shell=True)
+
+#2
+En Django, puedes crear un respaldo de tu base de datos usando el comando manage.py dumpdata. Ejecuta el comando a continuación para respaldar todos los modelos de tu aplicación:
+
+python manage.py dumpdata --exclude contenttypes --indent 4 > db.json
+
+'''

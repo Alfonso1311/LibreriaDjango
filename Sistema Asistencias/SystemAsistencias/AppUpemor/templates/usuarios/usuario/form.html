@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../static/css/baseD.css">
+<link rel="stylesheet" href="../static/css/base.css">
 <form enctype="multipart/form-data" method="post">
   {% csrf_token %}
   {% for campo in formulario %}
@@ -13,7 +13,7 @@
         id="" 
         aria-describedby="helpId" 
         placeholder="{{ campo.label }}" 
-        value="{{ campo.value }}"
+        value=""
       />
     </div>
     <div class="col-12 help-text">{{ campo.errors }}</div>

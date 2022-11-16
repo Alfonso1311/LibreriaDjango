@@ -4,14 +4,17 @@
 
 {% block contenido %} 
 
-<link rel="stylesheet" href="../static/css/baseD.css">
+<link rel="stylesheet" href="../static/css/index.css">
 
     <div class="card">
         <div class="card-header">
+            <div class="titleTypeUser">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <h4 class="">Profesores</h4>
+            </div>
             <a name="" id="" class="btn btn-warning" href="{% url 'crearP' %}" role="button"><i class="fa-solid fa-circle-plus"></i> Nuevo</a>
         </div>
         <div class="card-body">
-            <h4 class="card-title">Profesores</h4>
             <div class="table-responsive">
                 <table class="table table-primary">
                     <thead>
@@ -23,6 +26,8 @@
                             <th scope="col">Fecha Nac</th>
                             <th scope="col">Correo</th>
                             <th scope="col">DA</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Usuario</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -36,6 +41,8 @@
                                 <td>{{ profesor.fechaNac|date:'Y-m-d' }}</td>
                                 <td>{{ profesor.correo }}</td>
                                 <td>{{ profesor.da }}</td>
+                                <td>{{ profesor.userType }}</td>
+                                <td>{{ profesor.user.username }}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarP' profesor.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a name="" id="" class="btn btn-danger" href="{% url 'eliminarP' profesor.id%}" role="button"><i class="fa-solid fa-trash"></i></a>

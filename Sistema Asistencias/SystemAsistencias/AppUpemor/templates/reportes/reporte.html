@@ -1,0 +1,16 @@
+{% extends "baseP.html" %}
+
+{% block titulo %} Reporte {% endblock %}
+
+{% block contenido %} 
+
+    <form action="{% url 'generarReporte' %}" method="get">
+        <input type="text" name="campo" placeholder="Ingrese un status">
+        <button type="submit" class="btn btn-warning">Generar reporte</button>
+    </form>
+    <!--
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <a href="{% url 'generarReporte' %}" class="btn btn-warning">Generar reporte</a>
+    </div>
+    -->
+{% endblock %}

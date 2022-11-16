@@ -8,30 +8,68 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../static/css/baseP.css">
+    <link rel="stylesheet" href="../static/css/base.css">
     <!-- Bootstrap CSS v5.2.0-beta1 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     
 </head>
 
 <body>
-    <div class="iconProfile">
-        <i class="fa-solid fa-user"></i>
-    </div>
-    <h3>Perfil Alumno</h3>
-
-    <nav class="navbar navbar-expand navbar-light">
-        <div class="nav navbar-nav">
-            <a class="nav-item nav-link" href="{% url 'inicio' %}">Inicio</a>
-            <a class="nav-item nav-link" href="{% url 'alumnos' %}">Alumnos</a>
-            <a class="nav-item nav-link" href="{% url 'grupos' %}">Grupos</a>
-            <a class="nav-item nav-link" href="{% url 'horarios' %}">Horarios</a> 
-            <a class="nav-item nav-link" href="{% url 'asistencias' %}">Pase de lista</a>
+    <header>
+        <i class="fa-solid fa-bars"></i>
+        <div class="userContainer">
+            <div class="iconProfile">
+                <!--<i class="fa-solid fa-user"></i> -->
+                <img class="btn-md fa-user" src="#" alt="" style="border-radius:50%;">    
+            </div>
+            <div class="user">
+                <h3>ElPoncho</h3>
+                <div class="userType">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <h3>Alumno</h3>
+                </div>
+            </div>
         </div>
-    </nav>
+
+        <nav class="navbar navbar-expand navbar-light">
+            <ul>
+                <li class="active">
+                    <i class="fa-solid fa-house"></i>
+                    <a href="{% url 'inicioD' %}">Inicio</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-user-gear"></i>
+                    <a href="#">Clases</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <a href="{% url 'asistencias' %}">Asistencias</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <a href="{% url 'justificantes' %}">Justificantes</a> 
+                </li>
+                <li>
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <a href="#">Reporte de asistencias</a> 
+                </li>
+                <li class="exit">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <a href="{% url 'salir' %}">Cerrar Sesión</a> 
+                </li>
+            </ul>
+        </nav>
+    </header>
 
     <div class="container">
         <div class="row">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
         <div class="col-12">
             <br>
             {% block contenido %} {% endblock %}

@@ -4,14 +4,19 @@
 
 {% block contenido %} 
 
-<link rel="stylesheet" href="../static/css/baseD.css">
+<link rel="stylesheet" href="../static/css/index.css">
 
     <div class="card">
         <div class="card-header">
+            <div class="titleTypeUser">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <!--<img src="http://127.0.0.1:8000/imagenes/imagenes/cerdo2.jpg" alt="" width="300" height="300">
+                <h3>{{ user.is_staff }}mas</h3>-->
+                <h4 class="">Alumnos</h4>
+            </div>
             <a name="" id="" class="btn btn-warning" href="{% url 'crearA' %}" role="button"><i class="fa-solid fa-circle-plus"></i> Nuevo</a>
         </div>
         <div class="card-body">
-            <h4 class="card-title">Alumnos </h4>
             <div class="table-responsive">
                 <table class="table table-primary">
                     <thead>
@@ -23,7 +28,8 @@
                             <th scope="col">FechaNac</th>
                             <th scope="col">Correo</th>
                             <th scope="col">Foto</th>
-                            <th scope="col">Grupo_ID</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Usuario</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -39,7 +45,8 @@
                                 <td>
                                     <img src="{{ alumno.imagen.url }}" width="70" height="70">
                                 </td>
-                                <td>{{ alumno.grupo}}</td>
+                                <td>{{ alumno.userType }}</td>
+                                <td>{{ alumno.user.username }}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarA' alumno.matricula%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a name="" id="" class="btn btn-danger" href="{% url 'eliminarA' alumno.matricula%}" role="button"><i class="fa-solid fa-trash"></i></a>

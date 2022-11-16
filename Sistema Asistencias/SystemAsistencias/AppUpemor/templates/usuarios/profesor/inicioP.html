@@ -4,7 +4,7 @@
 
 {% block contenido %} 
 
-<link rel="stylesheet" href="../static/css/inicioP.css">
+<link rel="stylesheet" href="../static/css/inicio.css">
 
     <div class="row row-cols-1 row-cols-md-3 g-3 container-inicio">
         <a href="{% url 'alumnos' %}">
@@ -40,9 +40,20 @@
                 </div>
             </div>
         </a>
+        <a href="{% url 'asistencias' %}">
+            <div class="col">
+                <div class="card card4">
+                    <div class="card-body">
+                        <p class="card-title">31</p>
+                        <h5 class="card-text">Asistencias</h5>
+                    </div>
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+            </div>
+        </a>
         <a href="{% url 'justificantes' %}">
             <div class="col">
-                <div class="card card3">
+                <div class="card card5">
                     <div class="card-body">
                         <p class="card-title">15</p>
                         <h5 class="card-text">Justificantes</h5>
@@ -53,7 +64,7 @@
         </a>
         <a href="#">
             <div class="col">
-                <div class="card card3">
+                <div class="card card6">
                     <div class="card-body">
                         <p class="card-title">19</p>
                         <h5 class="card-text">Reportes Excel</h5>
@@ -63,4 +74,6 @@
             </div>
         </a>
     </div>
+
+    <button type="button" class="btn btn-primary btn-lg btn-block">Pasar lista</button>
 {% endblock %}

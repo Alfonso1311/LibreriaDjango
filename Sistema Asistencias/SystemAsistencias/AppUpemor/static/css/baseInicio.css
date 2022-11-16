@@ -9,3 +9,7 @@
 .nav a:hover{
     color: #ffb731;
 }
+
+.btn-block{
+    margin-top: 10vh;
+}

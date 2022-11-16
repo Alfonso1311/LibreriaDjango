@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="../static/css/base.css">
+<form enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  {% for campo in formulario %}
+    <div class="mb-3">
+      <label for="" class="form-label">{{ campo.label }}</label>
+      {% if campo.name == 'carrera' %}
+        <select name="carrera" id="carrera" class="form-select" aria-selected="true">
+          <option value="">------- SELECCIONE -------</option>
+          <option value="LAE">Licenciatura en Administración y Gestión Empresarial</option>
+          <option value="IBT">Ingeniería en Biotecnología</option>
+          <option value="ITA">Ingeniería en Tecnología Ambiental</option>
+          <option value="IIN">Ingeniería en Industrial</option>
+          <option value="ITI">Ingeniería en Tecnologías de la Información</option>
+          <option value="IET">Ingeniería en Electrónica y Telecomunicaciones</option>
+          <option value="IFI">Ingeniería en Financiera</option>
+        </select>
+        {% else %}
+        <input 
+          type="{{ campo.field.widget.input_type }}"
+          class="form-control" 
+          name="{{ campo.name }}" 
+          id="" 
+          aria-describedby="helpId" 
+          placeholder="{{ campo.label }}" 
+          value="{{ campo.value }}"
+        />
+      {% endif %}
+    </div>
+    <div class="col-12 help-text">{{ campo.errors }}</div>
+  {% endfor %}
+  <input name="" id="" class="btn btn-success" type="submit" value="Enviar información">
+  <a name="" id="" class="btn btn-primary" href="{% url 'grupos' %}" role="button">Cancelar</a>
+</form>

@@ -1,6 +1,7 @@
 from dataclasses import fields
 from pyexpat import model
 from django import forms
+from .choices import CARERS_CHOICES
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Asistencia, Directivo, Profesor, Alumno, Grupo, Horario, Asistencia, Justificante, Usuario, Asignatura
@@ -17,15 +18,19 @@ class ProfesorForm(forms.ModelForm):
         fields = '__all__' 
 
 class AlumnoForm(forms.ModelForm):
+    grupo = forms.ModelChoiceField(queryset=Grupo.objects.order_by('id').values_list('id', flat=True).distinct(),empty_label=None, label=None, required=True)
+
     class Meta:
         model = Alumno
         fields = '__all__'  #['Nombre','Apellido,'Foto'] si quiero especificar campos de la base de datos 
-        
+
 class GrupoForm(forms.ModelForm):
+    #carrera = forms.CharField(max_length=3, widget=forms.Select(choices=CARERS_CHOICES))
+
     class Meta:
         model = Grupo
         fields = '__all__'
-        
+
 class HorarioForm(forms.ModelForm):
     class Meta:
         model = Horario
@@ -41,21 +46,13 @@ class JustificanteForm(forms.ModelForm):
         model = Justificante
         fields = '__all__'
 
-class UsuarioForm(UserCreationForm):
+class UsuarioForm(UserCreationForm, forms.ModelForm):
     password1: forms.CharField(label='Contraseña', widget=forms.PasswordInput(attrs={'class':'form-control'}))
     password2: forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    
-
+   
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2']
-
-'''
-class SignUpView(forms.ModelForm):
-    class Meta:
-        model = Usuario
-        fields = '__all__'
-'''
 
 class AsignaturaForm(forms.ModelForm):
     class Meta:

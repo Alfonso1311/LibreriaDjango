@@ -4,19 +4,23 @@
 
 {% block contenido %} 
 
-<link rel="stylesheet" href="../static/css/baseD.css">
+<link rel="stylesheet" href="../static/css/index.css">
 
     <div class="card">
         <div class="card-header">
+            <div class="titleTypeUser">
+                <i class="fa-solid fa-users"></i>
+                <h4 class="">Usuarios</h4>
+            </div>
             <a name="" id="" class="btn btn-warning" href="{% url 'crearU' %}" role="button"><i class="fa-solid fa-circle-plus"></i> Nuevo</a>
         </div>
         <div class="card-body">
-            <h4 class="card-title">Usuarios</h4>
             <div class="table-responsive">
                 <table class="table table-primary">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
+                            <th scope="col">Tipo</th>
                             <th scope="col">Usuario</th>
                             <th scope="col">Password</th>
                             <th scope="col">Acciones</th>
@@ -26,9 +30,17 @@
                         {% for user in usuarios %}
                             <tr class="">
                                 <td>{{ user.id }}</td>
+                                {% if user.id == user.directivo.user.id %}
+                                    <td>{{ user.directivo.userType }}</td>
+                                {% elif user.id == user.profesorUser.user.id %}
+                                    <td>{{ user.profesorUser.userType }}</td>
+                                {% elif user.id == user.alumnoUser.user.id %}
+                                    <td>{{ user.alumnoUser.userType }}</td>
+                                {% else %}
+                                    <td></td>
+                                {% endif %}
                                 <td>{{ user.username }}</td>
-                                <td>{{ user.password }}</td>
-                                
+                                <td>ENCRIPTED</td>  
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarU' user.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a name="" id="" class="btn btn-danger" href="{% url 'eliminarU' user.id%}" role="button"><i class="fa-solid fa-trash"></i></a>

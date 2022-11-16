@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="../static/css/base.css">
+<form enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  {% for campo in formulario %}
+    <div class="mb-3">
+      <label for="" class="form-label">{{ campo.label }}</label>
+      {% if campo.name == 'fechaReg' %}
+        <input 
+          type="date"
+          class="form-control" 
+          name="{{ campo.name }}" 
+          id="" 
+          aria-describedby="helpId" 
+          placeholder="{{ campo.label }}" 
+          value="{{ campo.value|date:'Y-m-d' }}"
+        />
+        {% else %}
+          <input 
+            type="{{ campo.field.widget.input_type }}"
+            class="form-control" 
+            name="{{ campo.name }}" 
+            id="" 
+            aria-describedby="helpId" 
+            placeholder="{{ campo.label }}" 
+            value="{{ campo.value }}"
+          />
+      {% endif %}
+    </div>
+    <div class="col-12 help-text">{{ campo.errors }}</div>
+  {% endfor %}
+  <input name="" id="" class="btn btn-success" type="submit" value="Enviar información">
+  <a name="" id="" class="btn btn-primary" href="{% url 'asistencias' %}" role="button">Cancelar</a>
+</form>

@@ -6,7 +6,7 @@ import face_recognition
 
 #Imagen a comparar
 
-image = cv2.imread("Images\Cristian.jpg")
+image = cv2.imread("Images\Alfonso.jpg")
 face_loc = face_recognition.face_locations(image)[0]
 #print("face_loc:", face_loc)
 face_image_encodings = face_recognition.face_encodings(image, known_face_locations=[face_loc])[0]
@@ -33,7 +33,7 @@ while True:
             print("Result:", result)
 
             if result[0] == True:
-                text = "Cristian"
+                text = "Alfonso"
                 color = (125, 220, 0)
             else:
                 text = "Desconocido"

@@ -4,7 +4,7 @@
 
 {% block contenido %} 
 
-<link rel="stylesheet" href="../static/css/baseP.css">
+<link rel="stylesheet" href="../static/css/index.css">
 
     <div class="card">
         <div class="card-header">
@@ -17,10 +17,9 @@
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Grupo</th>
                             <th scope="col">Status</th>
                             <th scope="col">Fecha Reg</th>
-                            <th scope="col">Matricula_Alumno</th>
+                            <th scope="col">Alumno</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -28,10 +27,9 @@
                         {% for asistencia in asistencias %}
                             <tr class="">
                                 <td>{{ asistencia.id }}</td>
-                                <td>{{ asistencia.grupo }}</td>
                                 <td>{{ asistencia.status }}</td>
                                 <td>{{ asistencia.fechaReg }}</td>
-                                <td>{{ asistencia.matricula}}</td>
+                                <td>{{ asistencia.id_alumno.nombre }}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarAsis' asistencia.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a name="" id="" class="btn btn-danger" href="{% url 'eliminarAsis' asistencia.id%}" role="button"><i class="fa-solid fa-trash"></i></a>

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../static/css/baseA.css">
+<link rel="stylesheet" href="../static/css/base.css">
 <form enctype="multipart/form-data" method="post">
   {% csrf_token %}
   {% for campo in formulario %}
@@ -6,13 +6,13 @@
       <label for="" class="form-label">{{ campo.label }}</label>
       {% if campo.name == 'fechaJusti' %}
         <input 
-          type="{{ campo.field.widget.input_type }}"
+          type="date"
           class="form-control" 
           name="{{ campo.name }}" 
           id="" 
           aria-describedby="helpId" 
           placeholder="{{ campo.label }}" 
-          value="{{ campo.value|date:'Y-m-d' }}"
+          value=""
         />
         {% else %}
           <input 
@@ -22,7 +22,7 @@
             id="" 
             aria-describedby="helpId" 
             placeholder="{{ campo.label }}" 
-            value="{{ campo.value }}"
+            value=""
           />
       {% endif %}
       {% if campo.field.widget.input_type == 'file' and campo.value %}

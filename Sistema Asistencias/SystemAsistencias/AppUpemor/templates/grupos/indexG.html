@@ -4,7 +4,7 @@
 
 {% block contenido %} 
 
-<link rel="stylesheet" href="../static/css/baseP.css">
+<link rel="stylesheet" href="../static/css/index.css">
 
     <div class="card">
         <div class="card-header">
@@ -20,6 +20,7 @@
                             <th scope="col">Cuatrimestre</th>
                             <th scope="col">Grupo</th>
                             <th scope="col">Carrera</th>
+                            <th scope="col">Alumno</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -30,6 +31,7 @@
                                 <td>{{ grupo.cuatri }}</td>
                                 <td>{{ grupo.grupo }}</td>
                                 <td>{{ grupo.carrera}}</td>
+                                <td>{{ grupo.alumno}}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarG' grupo.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a name="" id="" class="btn btn-danger" href="{% url 'eliminarG' grupo.id%}" role="button"><i class="fa-solid fa-trash"></i></a>

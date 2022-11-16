@@ -8,12 +8,15 @@ from django.contrib.staticfiles.urls import static
 
 urlpatterns = [
 
+    #path('directivo', views.restaurar, name='restaurar'),
+
     path('login/', LoginView.as_view(template_name="registration/login.html"),name="login"),
     path('logout/', LogoutView.as_view(template_name="paginas/inicio.html"),name="salir"),
     
     path('', views.inicio, name='inicio'), # El nombre es para acceder a una url con ese nombre
     path('directivo', login_required(views.inicioD), name='inicioD'),
-    path('profesor', login_required(views.inicioP), name='inicioP'),
+    path('profesor', views.inicioP, name='inicioP'),
+    path('alumno', views.inicioA, name='inicioA'),
 
     #path('login/', views.salir, name='salir'),
 
@@ -62,5 +65,7 @@ urlpatterns = [
     path('asignatura/editar/<str:clave>', login_required(views.editarAsignatura), name='editarAsig'),
     path('eliminarAsig/<str:clave>', login_required(views.eliminarAsignatura), name='eliminarAsig'),
 
+    path('reportes/', views.reportes, name='reporte'),
+    path('reportes', login_required(views.generarReporte), name='generarReporte'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
