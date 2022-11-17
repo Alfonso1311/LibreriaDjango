@@ -1,6 +1,6 @@
 {% extends "baseP.html" %}
 
-{% block titulo %} Lista de Profesores {% endblock %}
+{% block titulo %} Lista de Justificantes {% endblock %}
 
 {% block contenido %} 
 
@@ -30,11 +30,14 @@
                                 <td>{{ justificante.id }}</td>
                                 <td>{{ justificante.fechaJusti|date:'Y-m-d' }}</td>
                                 <td>{{ justificante.motivo }}</td>
-                                <td>{{ justificante.receta}}</td>
-                                <td>{{ justificante.alumno.nombre }}</td>
+                                <!--<td>{{ justificante.receta}}</td>-->
+                                <td>
+                                    <a name="" id="" class="btn btn-success" href="{% url 'verJ' justificante.id%}" role="button"><i class="fa-solid fa-eye"></i> View File</a>
+                                </td>
+                                    <td>{{ justificante.alumno.nombre }}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarJ' justificante.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a name="" id="" class="btn btn-danger" href="{% url 'eliminarJ' justificante.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
+                                    <a name="" id="" class="btn btn-danger btnDelete" href="{% url 'eliminarJ' justificante.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}

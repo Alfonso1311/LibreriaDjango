@@ -34,7 +34,7 @@
                                 <td>{{ grupo.alumno}}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarG' grupo.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a name="" id="" class="btn btn-danger" href="{% url 'eliminarG' grupo.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
+                                    <a name="" id="" class="btn btn-danger btnDelete" href="{% url 'eliminarG' grupo.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}

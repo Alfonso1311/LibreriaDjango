@@ -30,7 +30,7 @@
                                 <td>{{ horario.tolerancia}}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarH' horario.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a name="" id="" class="btn btn-danger" href="{% url 'eliminarH' horario.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
+                                    <a name="" id="" class="btn btn-danger btnDelete" href="{% url 'eliminarH' horario.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}

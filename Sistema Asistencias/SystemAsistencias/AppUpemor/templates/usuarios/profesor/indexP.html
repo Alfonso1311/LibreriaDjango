@@ -45,7 +45,7 @@
                                 <td>{{ profesor.user.username }}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarP' profesor.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a name="" id="" class="btn btn-danger" href="{% url 'eliminarP' profesor.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
+                                    <a name="" id="" class="btn btn-danger btnDelete" href="{% url 'eliminarP' profesor.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                             {% empty %}

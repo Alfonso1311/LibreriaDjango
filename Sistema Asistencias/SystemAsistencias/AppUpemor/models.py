@@ -69,6 +69,17 @@ class Profesor(models.Model):
     def delete(self, using=None, keep_parents=False):
         super().delete()
 
+class Grupo(models.Model):
+
+    id = models.AutoField(primary_key=True)
+    cuatri = models.IntegerField(verbose_name='Cuatrimestre')
+    grupo = models.CharField(max_length=1, verbose_name='Grupo')
+    carrera = models.CharField(max_length=3, verbose_name='Carrera', default='')
+    #alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE, verbose_name='ID_Alumno', related_name='alumno', default='')
+
+    def delete(self, using=None, keep_parents=False):
+        super().delete()
+
 class Alumno(models.Model):
     matricula = models.CharField(max_length=15, primary_key=True)
     nombre = models.CharField(max_length=100, verbose_name='Nombre')
@@ -79,6 +90,7 @@ class Alumno(models.Model):
     imagen = models.ImageField(upload_to='imagenes/', verbose_name='Imagen', null=True)
     userType = models.CharField(max_length=100, verbose_name='', default='Alumno')
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='ID_Usuario', related_name='alumnoUser')
+    grupo_id = models.ForeignKey(Grupo, on_delete=models.CASCADE, verbose_name='ID_Grupo', related_name='grupoAlum', default='')
     
     #grupo = models.ModelChoiceField(queryset=Grupo.objects.order_by('id').values_list('carrera', flat=True).distinct(),empty_label=None, label=None, required=True)
     #grupo = models.CharField(max_length=10, verbose_name='Grupo_ID')
@@ -89,18 +101,6 @@ class Alumno(models.Model):
 
     def delete(self, using=None, keep_parents=False):
         self.imagen.storage.delete(self.imagen.name)
-        super().delete()
-
-
-class Grupo(models.Model):
-
-    id = models.AutoField(primary_key=True)
-    cuatri = models.IntegerField(verbose_name='Cuatrimestre')
-    grupo = models.CharField(max_length=1, verbose_name='Grupo')
-    carrera = models.CharField(max_length=3, verbose_name='Carrera', default='')
-    alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE, verbose_name='ID_Alumno', related_name='alumno', default='')
-
-    def delete(self, using=None, keep_parents=False):
         super().delete()
 
 class Horario(models.Model):
@@ -137,9 +137,12 @@ class Justificante(models.Model):
 class Asignatura(models.Model):
     clave = models.CharField(max_length=100, verbose_name='Clave')
     nomAsignatura = models.CharField(max_length=100, verbose_name='Nombre de Asignatura')
-    horario_id = models.IntegerField(verbose_name='ID_Horario')
-    profesor_id = models.CharField(max_length=15, verbose_name='ID_Profesor')
-    grupo_id = models.IntegerField(verbose_name='ID_Grupo')
+    #horario_id = models.IntegerField(verbose_name='ID_Horario')
+    horario = models.ForeignKey(Horario, on_delete=models.CASCADE, verbose_name='ID_Horario', related_name='horarioAsig', default='')
+    #profesor_id = models.CharField(max_length=15, verbose_name='ID_Profesor')
+    profesor = models.ForeignKey(Profesor, on_delete=models.CASCADE, verbose_name='ID_Profesor', related_name='profesorAsig', default='')
+    #grupo_id = models.IntegerField(verbose_name='ID_Grupo')
+    grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE, verbose_name='ID_Grupo', related_name='grupoAsig', default='')
     
     def __str__(self):
         fila = "Nombre: " + self.nombre + " - " + " Apellido P: " + self.apellidoP

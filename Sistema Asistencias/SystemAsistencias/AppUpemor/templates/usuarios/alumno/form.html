@@ -7,7 +7,7 @@
         <label for="" class="form-label">{{ campo.label }}</label>
       {% endif %}
       {% if campo.name == 'fechaNac' %}
-        <input 
+        <input
           type="date"
           class="form-control" 
           name="{{ campo.name }}" 
@@ -16,20 +16,41 @@
           placeholder="{{ campo.label }}" 
           value=""
         />
-      {% endif %}
-      {% if campo.name == 'grupo' %}
-        {{ campo.form.grupo }}
-      {% endif %}
-      {% if campo.name != 'fechaNac' and campo.name != 'grupo' %}
-          <input 
-            type="{{ campo.field.widget.input_type }}"
-            class="form-control" 
-            name="{{ campo.name }}" 
-            id="" 
-            aria-describedby="helpId" 
-            placeholder="{{ campo.label }}" 
-            value=""
-          />
+        {% else %}
+          {% if campo.name == 'grupo' %}
+            <!--{{ campo.form.grupo }}-->
+            <input 
+                type="{{ campo.field.widget.input_type }}"
+                class="form-control" 
+                name="{{ campo.name }}" 
+                id="" 
+                aria-describedby="helpId" 
+                placeholder="{{ campo.label }}" 
+                value=""
+              />
+            {% else %}
+              {% if campo.name == 'userType' %}
+                <input
+                  type="hidden"
+                  class="form-control" 
+                  name="{{ campo.name }}" 
+                  id="" 
+                  aria-describedby="helpId" 
+                  placeholder="{{ campo.label }}" 
+                  value="Alumno"
+                />  
+                {% else %}
+                  <input 
+                    type="{{ campo.field.widget.input_type }}"
+                    class="form-control" 
+                    name="{{ campo.name }}" 
+                    id="" 
+                    aria-describedby="helpId" 
+                    placeholder="{{ campo.label }}" 
+                    value=""
+                  />
+              {% endif %}
+          {% endif %}
       {% endif %}
       {% if campo.field.widget.input_type == 'file' and campo.value %}
         <br>

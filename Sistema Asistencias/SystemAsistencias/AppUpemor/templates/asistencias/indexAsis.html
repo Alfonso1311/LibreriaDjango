@@ -28,11 +28,11 @@
                             <tr class="">
                                 <td>{{ asistencia.id }}</td>
                                 <td>{{ asistencia.status }}</td>
-                                <td>{{ asistencia.fechaReg }}</td>
+                                <td>{{ asistencia.fechaReg|date:'Y-m-d' }}</td>
                                 <td>{{ asistencia.id_alumno.nombre }}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarAsis' asistencia.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a name="" id="" class="btn btn-danger" href="{% url 'eliminarAsis' asistencia.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
+                                    <a name="" id="" class="btn btn-danger btnDelete" href="{% url 'eliminarAsis' asistencia.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}

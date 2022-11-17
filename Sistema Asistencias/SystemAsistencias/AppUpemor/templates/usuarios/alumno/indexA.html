@@ -49,7 +49,7 @@
                                 <td>{{ alumno.user.username }}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editarA' alumno.matricula%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a name="" id="" class="btn btn-danger" href="{% url 'eliminarA' alumno.matricula%}" role="button"><i class="fa-solid fa-trash"></i></a>
+                                    <a name="" id="" class="btn btn-danger btnDelete" href="{% url 'eliminarA' alumno.matricula%}" role="button"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                             {% empty %}

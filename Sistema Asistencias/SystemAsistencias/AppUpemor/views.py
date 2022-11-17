@@ -3,12 +3,10 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
-'''
 from gettext import install
 from unittest import result
 import cv2
 import face_recognition
-'''
 #import subprocess
 from subprocess import check_output
 from django.http import HttpResponse
@@ -18,7 +16,28 @@ from openpyxl.styles import Font, Alignment, Border, Side, PatternFill
 from .models import Directivo, Profesor, Alumno, Grupo, Horario, Asistencia, Justificante, Usuario, Asignatura
 from .forms import DirectivoForm, ProfesorForm, AlumnoForm, GrupoForm, HorarioForm, AsistenciaForm, JustificanteForm, UsuarioForm, AsignaturaForm
 # Create your views here.
-
+'''
+def validarLogin(request):
+    if request.method == 'POST':
+        usuario = request.POST['usuario']
+        password = request.POST['password']
+        try:
+            user = User.objects.get(username=usuario)
+            if user.check_password(password):
+                if user.id == user.directivo.user.id:
+                    return render(request='inicioD')
+                elif user.id == user.profesor.user.id:
+                    return redirect('inicioP')
+                elif user.id == user.alumno.user.id:
+                    return redirect('inicioA')
+            else:
+                messages.error(request, 'Usuario o contraseña incorrectos')
+                return redirect('login/')
+        except:
+            messages.error(request, 'Usuario o contraseña incorrectos')
+            return redirect('login/')
+    return render(request, 'registration/login.html')
+'''
 def salir(request):
     logout(request)
     return redirect('login/')
@@ -203,6 +222,10 @@ def eliminarJustificante(request, id):
     justificante.delete()
     return redirect('justificantes')
 
+def verJustificante(request, id):
+    justificante = Justificante.objects.get(id=id)
+    return render(request, 'justificantes/viewPDF.html', {'justificante': justificante})
+
 def usuarios(request):
     usuarios = User.objects.all()
     return render(request, 'usuarios/usuario/indexU.html', {'usuarios': usuarios})
@@ -257,10 +280,10 @@ def eliminarAsignatura(request, clave):
     asignatura = Asignatura.objects.get(clave=clave)
     asignatura.delete()
     return redirect('asignaturas')
-'''
+
 def abrirReconocimiento(request):
     #Imagen a comparar
-    image = cv2.imread("Images\Alfonso.jpg")
+    image = cv2.imread("C:/Users/alfon/Desktop/Proyecto Estancia II/Sistema Asistencias/SystemAsistencias/imagenes/photo_2022-08-29_17-46-59.png")
     face_loc = face_recognition.face_locations(image)[0]
     #print("face_loc:", face_loc)
     face_image_encodings = face_recognition.face_encodings(image, known_face_locations=[face_loc])[0]
@@ -297,13 +320,18 @@ def abrirReconocimiento(request):
 
     cap.release()
     cv2.destroyAllWindows()
-'''
+
+    return render(request, 'usuarios/profesor/inicioP.html')
+
 def reportes(request):
     return render(request, 'reportes/reporte.html')
 
 def generarReporte(request):
     campo = request.GET.get('campo')
-    query = Asistencia.objects.filter(status = campo)
+    if campo == '':
+        query = Asistencia.objects.all()
+    else:
+        query = Asistencia.objects.filter(status = campo)
     wb = Workbook()
     bandera = True
     controlador = 8
@@ -345,6 +373,7 @@ def generarReporte(request):
         ws.column_dimensions['C'].width = 20
         ws.column_dimensions['D'].width = 20
         ws.column_dimensions['E'].width = 20
+        ws.column_dimensions['F'].width = 20
 
         #Crear encabezados o cabeceras
         ws.row_dimensions[3].height = 20

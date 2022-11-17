@@ -45,7 +45,7 @@
                                 <td>{{ directivo.user.username }}</td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="{% url 'editar' directivo.id%}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a name="" id="" class="btn btn-danger" href="{% url 'eliminar' directivo.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
+                                    <a name="" id="" class="btn btn-danger btnDelete" href="{% url 'eliminar' directivo.id%}" role="button"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                             {% empty %}
